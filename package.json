@@ -15,16 +15,13 @@
     "url": "git+https://github.com/mcavoybn/musical-octo-dollop.git"
   },
   "keywords": [
-    "Music",
-    "Visualizer",
-    "Angular",
-    "Firebase",
-    "Webapp"
+    "Time Tracking",
+    "Agriculture"
   ],
-  "author": "Ben McAvoy",
+  "author": "Trailhead Apprentices",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mcavoybn/musical-octo-dollop/issues"
+    "url": "https://github.com/mcavoybn/AgriPay"
   },
-  "homepage": "https://github.com/mcavoybn/musical-octo-dollop#readme"
+  "homepage": "https://github.com/mcavoybn/mcavoybn/AgriPay"
 }

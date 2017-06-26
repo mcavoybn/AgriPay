@@ -1,14 +1,14 @@
 {
-  "name": "public",
+  "name": "AgriPay app",
   "version": "1.0.0",
-  "description": "An application that allows users to create playlists of YouTube music videos",
-  "main": "index.js",
+  "description": "An application to make time tracking for farmers quick and easy",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JGraziano2/Turn-Table.git"
+    "url": "git+https://github.com/mcavoybn/AgriPay"
   },
   "author": "Trailhead Apprentices",
   "license": "UNLICENSED",

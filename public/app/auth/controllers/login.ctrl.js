@@ -8,14 +8,16 @@
     LoginCtrl.$inject = ['$scope', '$state', '$firebaseAuth'];
 
     function LoginCtrl($scope, $state, $firebaseAuth) {
-        $scope.submit;
+        $scope.submit = submit;
         $scope.email;
         $scope.password;
         $scope.message = "";
+        $scope.uid;
         
         function submit(){
-            return $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
+           $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
                 .then( (data) => { 
+                    $scope.uid = data.uid;
                     $state.go('crews', { id: data.uid } ); 
                 })
                 .catch( (error) => { 

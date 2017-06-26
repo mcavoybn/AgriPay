@@ -8,7 +8,11 @@
                     <div class="form-group">
                         <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
                     </div>
-                    <button type="submit" class="btn btn-success" ng-click="submit()">Login</button>
+                    <button type="submit" class="btn btn-success" ng-click="submit()" id="loginbutton">
+                        <div ng-hide="clickedLogin">Login</div>
+                        <div class="loader" ng-show="clickedLogin"></div>
+                    </button>
+                    
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
                             <a ui-sref>Forgot Password?</a>

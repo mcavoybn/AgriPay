@@ -1,3 +1,21 @@
 <div class="container">
-
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 well">
+            <h3>Register</h3>
+                <div class="form-group">
+                    <input type="username" class="form-control" ng-model="username" id="username" placeholder="Username" autofocus />
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" ng-model="email" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="confirmPassword" id="confirm-password" placeholder="Confirm Password" />
+                </div>
+                <button type="submit" class="btn btn-success" ng-click="submit()">Register</button>              
+            <p id="message">{{message}}</p>
+        </div>
+    </div>
 </div>

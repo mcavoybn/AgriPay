@@ -2,15 +2,23 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 well">
                 <h3>Login</h3>
-                <form ng-submit="login()">
                     <div class="form-group">
                         <input type="email" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus />
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
                     </div>
-                    <button type="submit" class="btn btn-success" ng-click="close()">Login</button>
-                </form>
+                    <button type="submit" class="btn btn-success" ng-click="submit()">Login</button>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <a ui-sref>Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <a ui-sref="register">Register</a>
+                        </div>
+                    </div>                   
             <p id="message">{{message}}</p>
         </div>
     </div>

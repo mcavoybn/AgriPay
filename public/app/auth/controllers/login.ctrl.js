@@ -16,10 +16,10 @@
         function submit(){
             return $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
                 .then( (data) => { 
-                    state.go('crews', { id: data.uid } ); 
+                    $state.go('crews', { id: data.uid } ); 
                 })
                 .catch( (error) => { 
-                    $scope.message = error; 
+                    $scope.message = error.message; 
                 });                                                                                                   
         }
         

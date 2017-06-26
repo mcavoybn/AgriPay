@@ -19,10 +19,10 @@
                 $scope.message = '';
                 return $firebaseAuth().$createUserWithEmailAndPassword($scope.email, $scope.password)
                     .then( (data) => {
-                        $state.go('crews', { id: data.uid } )
+                        $state.go('crews', { id: data.uid } );
                     })
                     .catch( (error) => {
-                        $scope.message = error;        
+                        $scope.message = error.message;        
                     });
             }else{
                 $scope.message = "Passwords did not match!"

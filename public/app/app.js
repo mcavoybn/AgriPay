@@ -1,15 +1,15 @@
 (function() {
 	'use strict';
 
-//	var config = {
-//		apiKey: "AIzaSyC-259KUREALrIoVsjiUGVL4N0liVFcl3c",
-//	    authDomain: "turntable-60564.firebaseapp.com",
-//	    databaseURL: "https://turntable-60564.firebaseio.com",
-//	    projectId: "turntable-60564",
-//	    storageBucket: "turntable-60564.appspot.com",
-//	    messagingSenderId: "212071875365"
-//	};
-//	firebase.initializeApp(config);
+    var config = {
+        apiKey: "AIzaSyCA_3dhMskvBT_o59XFnnsiWECrFtmylN4",
+        authDomain: "agripay-p.firebaseapp.com",
+        databaseURL: "https://agripay-p.firebaseio.com",
+        projectId: "agripay-p",
+        storageBucket: "agripay-p.appspot.com",
+        messagingSenderId: "30210508168"
+    };
+    firebase.initializeApp(config);
 
 	angular
 		.module('app', ['ui.router', 'firebase']);

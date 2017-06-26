@@ -1,14 +1,25 @@
 <div class="container">
+    
+    <!-- View -->
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search..." ng-model="searchText">
             </div>
+            <button class="btn btn-success" ng-click="showCreateCrewForm()">Create New Crew</button>
         </div>
     </div>
     <div class="row">
         <ul>
-            <li ng-repeat="crew in crews | filter:searchText | orderBy: 'name'">{{crew.name}}</li>
+            <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
+                {{crew.name}}
+                <ul>
+                    <li>
+                        {{crew.count}} Employees in Crew
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
+    
 </div>

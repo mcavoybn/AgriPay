@@ -8,7 +8,10 @@
                     <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
                     <input type="password" class="form-control" ng-model="confirmPassword" id="confirm-password" placeholder="Confirm Password" />
                 </div>
-                <button type="submit" class="btn btn-success" ng-click="submit()">Register</button>              
+                <button type="submit" class="btn btn-success" ng-click="submit()" id="loginButton">
+                        <div ng-hide="clickedRegister">Register</div>
+                        <div class="loader" ng-show="clickedRegister"></div>
+                </button>
             <p id="message">{{message}}</p>
         </div>
     </div>

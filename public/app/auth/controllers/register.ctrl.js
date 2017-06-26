@@ -13,10 +13,12 @@
         $scope.password;
         $scope.confirmPassword = '';
         $scope.message = '';
+        $scope.clickedRegister = false;
         
         function submit(){
             if($scope.password == $scope.confirmPassword){
                 $scope.message = '';
+                $scope.clickedRegister = true;
                 return $firebaseAuth().$createUserWithEmailAndPassword($scope.email, $scope.password)
                     .then( (data) => {
                         $state.go('crews', { id: data.uid } );

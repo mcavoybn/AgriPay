@@ -11,8 +11,8 @@
         activate();
         
         function activate() {
-            var CrewsRef = firebase.database().ref().child($stateParams.id).child('crews');
-            $scope.crews = $firebaseArray(CrewsRef);
+            var crewsRef = firebase.database().ref().child($stateParams.id).child('crews');
+            $scope.crews = $firebaseArray(crewsRef);
         }
     }
 })();

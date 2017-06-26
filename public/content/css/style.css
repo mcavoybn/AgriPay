@@ -24,3 +24,6 @@ ol ul{
 /*--- Home ---*/
 
 /*--- Navigation ---*/
+nav a {
+    cursor: pointer;
+}

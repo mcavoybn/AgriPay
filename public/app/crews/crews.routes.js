@@ -9,7 +9,7 @@
     function config($stateProvider) {
         $stateProvider
         .state('crews', {
-            url: '/crews',
+            url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crews.tpl.html',
             controller: 'CrewsCtrl'
         });

@@ -5,15 +5,15 @@
     .module('app')
     .controller('NavigationCtrl', NavigationCtrl);
     
-    NavigationCtrl.$inject = ['$scope'];
-    
-    function NavigationCtrl($scope) {
+    NavigationCtrl.$inject = ['$scope', '$stateParams'];
+        
+    function NavigationCtrl($scope, $stateParams) {        
         activate();
         
         /////////////////////
         
         function activate() {
-            return;
+            $scope.uid = $stateParams.id;
         }
     }
 })();

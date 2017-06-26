@@ -5,17 +5,17 @@
     .module('app')
     .config(config);
     
-    config.$inject = ['$stateProvider', '$scope'];
+    config.$inject = ['$stateProvider'];
     
-    function config($stateProvider, $scope) {
+    function config($stateProvider) {
         $stateProvider
             .state('crews', {
-            url: '/crews/' + $scope.uid,
+            url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crews.tpl.html',
             controller: 'CrewsCtrl'
         })
         .state('employees', {
-            url: '/employees/' + $scope.uid,
+            url: '/employees/{id}',
             templateUrl: 'app/crews/templates/employees.tpl.html',
             controller: 'EmployeesCtrl'
         });

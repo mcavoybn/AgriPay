@@ -5,4 +5,4 @@ database.rules.json
 firebase.json
 npm-debug.log
 README.md
-functions
+/functions

@@ -4,6 +4,7 @@
   "description": "A music visualization web app using Angular and Firebase",
   "main": "app.js",
   "dependencies": {
+    "angular-barcode": "^2.0.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {},

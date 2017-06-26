@@ -1,0 +1,30 @@
+{
+  "name": "musical-octo-dollop",
+  "version": "1.0.0",
+  "description": "A music visualization web app using Angular and Firebase",
+  "main": "app.js",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcavoybn/musical-octo-dollop.git"
+  },
+  "keywords": [
+    "Music",
+    "Visualizer",
+    "Angular",
+    "Firebase",
+    "Webapp"
+  ],
+  "author": "Ben McAvoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcavoybn/musical-octo-dollop/issues"
+  },
+  "homepage": "https://github.com/mcavoybn/musical-octo-dollop#readme"
+}

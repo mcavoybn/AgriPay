@@ -1,0 +1,25 @@
+/*--- Global ---*/
+.active {
+    color: white !important;
+    background:#555 !important;
+    box-shadow: 0 0 15px white;
+    text-shadow: 2px 2px 5px black;
+}
+
+body{
+    background-color:#555;
+    overflow-x: hidden;
+    
+}
+
+ol ul{
+    list-style:none;
+}
+
+.well {
+    background-color: #000;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    border: none;
+}
+
+/*--- Home ---*/

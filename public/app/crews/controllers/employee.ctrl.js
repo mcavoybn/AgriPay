@@ -13,6 +13,7 @@
         $scope.goBack = goBack;
         $scope.isEditing = false;
         $scope.employee;
+        $scope.assignCrew = assignCrew;
         activate();
 
         function activate(){
@@ -21,7 +22,17 @@
             $scope.employee.$loaded().then((data) => {
                 $scope.employee = data;
             });            
+            
+            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            $scope.crews = $firebaseArray(crewsRef);
+            $scope.crews.$loaded().then((data) => {
+               $scope.crews = data; 
+            });
         }   
+        
+        function assignCrew(crew){
+            $scope.employee.crew = crew;
+        }
 
         function editEmployee(){
             $scope.isEditing = true;

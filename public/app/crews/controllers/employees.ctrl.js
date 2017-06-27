@@ -8,10 +8,11 @@
     EmployeesCtrl.$inject = ['$window', '$scope', '$state', '$firebaseArray', '$firebaseAuth', '$stateParams', 'ModalService'];
 
     function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, $stateParams, ModalService) {
-        $scope.employees = [];
+        $scope.employees;
         $scope.addEmployee = addEmployee;
-        $scope.selectEmployee = selectEmployee;
         $scope.removeEmployee = removeEmployee;
+        $scope.selectEmployee = selectEmployee;
+        
         activate();
 
         function activate(){
@@ -40,9 +41,10 @@
         }
 
         function selectEmployee(employee){
-            console.log(employee.$id);
             $state.go('employee', { employeeId: employee.$id} );
         }
+        
+        //-- Helper Functions --//
         
         function saveEmployees(){
             $scope.employees.forEach((employee) => {                

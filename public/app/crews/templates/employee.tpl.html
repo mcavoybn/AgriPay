@@ -69,10 +69,11 @@
                     <li><input type="text" ng-model="employee.gender" value="employee.gender"></li>
                     <li><em>Crew:</em></li>
                     <select ng-model="employee.crew">
-                        <!--                        <option ng-repeat="crew in crews" value="crew.name">crew.name</option>-->
+                            <option ng-click="assignCrew('No Crew')">No Crew</option>
+                            <option ng-repeat="crew in crews" ng-click="assignCrew(crew)">{{crew.name}}</option>
                     </select>
                     <li><em>Employment Status:</em></li>
-                    <select ng-model="vm.employee.type">
+                    <select ng-model="employee.type">
                         <option value="w2">W2</option>
                         <option value="1099">1099</option>
                         <option value="H2A">H2A</option>

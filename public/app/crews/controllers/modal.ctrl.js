@@ -21,18 +21,14 @@
         }
 
         function createCrew() {
-            var name = $('#name').val();
-            var manager = $('#manager').val();
-            var photo = $('#photo').val();
-
             /* MAKE IF NAME EXISTS DONT CREATE */
             $scope.crews.$add({
-                name: name,
-                manager: manager,
-                photo: photo,
+                name: $('#name').val(),
+                manager: $('#manager').val(),
+                photo: $('#photo').val(),
                 count: 0
             }).then((err) => {
-                           
+                console.log(err);  
             });
             /*$scope.employeeCount.length++;*/
         }

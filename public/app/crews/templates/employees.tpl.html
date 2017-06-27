@@ -7,7 +7,7 @@
                 <ul>
                     <li ng-repeat="employee in employees | filter: searchText | orderBy: 'name' ">
                         <h4 ng-click="selectEmployee(employee)">{{employee.firstName + " " + employee.lastName}}</h4>
-                        <p><em>Crew: {{employee.crew.name}}</em></p>
+                        <p><em>Crew: {{employee.crew}}</em></p>
                         <button class="btn btn-remove" ng-click="removeEmployee(employee)">Remove</button>
                     </li>
                 </ul>

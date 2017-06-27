@@ -21,7 +21,7 @@
         }).state('crew', {
             url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crew.tpl.html',
-            controller: 'CrewsCtrl',
+            controller: 'CrewCtrl',
             resolve: {
                 "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
                     return $firebaseAuth().$waitForSignIn();

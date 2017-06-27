@@ -5,6 +5,7 @@
                 <button type="button" class="close" ng-click="vm.cancel()" data-dismiss="modal">&times;</button>
                 <h3>Add New Employee</h3>
             </div>
+
             <div class="modal-body">   
                 <form ng-submit="submit()">     
                     <div class="form-group">
@@ -15,7 +16,7 @@
                             <option value="H2A">H2A</option>
                         </select>
                         Gender:
-                        <select ng-model="employee.gender">
+                        <select ng-model="vm.employee.gender">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>

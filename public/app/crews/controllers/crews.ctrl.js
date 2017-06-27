@@ -5,15 +5,15 @@
     .module('app')
     .controller('CrewsCtrl', CrewsCtrl);
     
-    CrewsCtrl.$inject = ['$scope', '$stateParams', '$firebaseArray', 'ModalService'];
+    CrewsCtrl.$inject = ['$scope', '$firebaseAuth', '$firebaseArray', 'ModalService'];
     
-    function CrewsCtrl($scope, $stateParams, $firebaseArray, ModalService) {
+    function CrewsCtrl($scope, $firebaseAuth, $firebaseArray, ModalService) {
         $scope.showCreateCrewForm = showCreateCrewForm;
         
         activate();
         
         function activate() {
-            var crewsRef = firebase.database().ref().child($stateParams.id).child('crews');
+            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
         }
         

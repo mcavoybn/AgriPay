@@ -1,4 +1,5 @@
 (function() {
+    'use strict'
     
     angular
     .module('app')
@@ -9,13 +10,31 @@
     function config($stateProvider) {
         $stateProvider
         .state('crews', {
-            url: '/crews/{id}',
+            url: '/crews',
             templateUrl: 'app/crews/templates/crews.tpl.html',
-            controller: 'CrewsCtrl'
-        }).state('crewDetail', {
-            url: '/crewDetail',
+            controller: 'CrewsCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
+        }).state('crew', {
+            url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crew.tpl.html',
-            controller: 'CrewCtrl'
+            controller: 'CrewsCtrl'
+        }).state('employees', {
+            url: '/employees',
+            templateUrl: 'app/crews/templates/employees.tpl.html',
+            controller: 'EmployeesCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
+        }).state('employee', {
+            url: '/employees/{id}',
+            templateUrl: 'app/crews/templates/employees.tpl.html',
+            controller: 'EmployeesCtrl'
         });
     }
 })();

@@ -15,7 +15,10 @@
                     <li><em>Crew:</em></li>
                     <li>{{employee.crew}}</li>
                 </ul>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Show more info</button>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo" ng-click="clickShow()">
+                    <div ng-hide="clickedShow">Show more info</div>
+                    <div ng-show="clickedShow">Show less info</div>
+                </button>
                 <div id="demo" class="collapse">
                     <ul>
                         <li><em>Address 1:</em></li>

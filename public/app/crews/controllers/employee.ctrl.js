@@ -14,7 +14,8 @@
         $scope.isEditing = false;
         $scope.employee;
         $scope.assignCrew = assignCrew;
-        activate();
+        $scope.clickedShow = false;
+        $scope.clickShow = clickShow;
 
         function activate(){
             var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
@@ -45,6 +46,14 @@
         
         function goBack(){
             $state.go('employees');
+        }
+
+        function clickShow(){
+            if($scope.clickedShow == false){
+                $scope.clickedShow = true;
+            }else{
+                $scope.clickedShow = false;
+            }
         }
     }
 })();

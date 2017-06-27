@@ -37,7 +37,7 @@
         }
         
         function removeEmployee(employee){
-            $scope.employees.$remove(employee);
+            if(confirm("Delete employee?")) $scope.employees.$remove(employee);
         }
 
         function selectEmployee(employee){

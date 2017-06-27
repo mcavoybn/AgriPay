@@ -1,11 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid text-center">
     
     <!-- View -->
     <div class="row">
         <img ng-src="{{crew.photo}}" />
-    </div>
-    <div class="row">
-        {{crew.photo}}
     </div>
     <div class="row">
         {{crew.name}}
@@ -18,9 +15,11 @@
         <button class="btn btn-primary" ng-click="addEmployeeToCrew()" id="crewAddEmployeeButton">Add Employees</button>
     </div>
     <div class="row">
+<!--
         <ul>
-            <li ng-repeat="employee in crew | orderBy: 'name'">
+            <li ng-repeat="employee in employees | orderBy: 'name'">{{employee}}</li>
         </ul>
+-->
     </div>
     
     <!-- Edit -->

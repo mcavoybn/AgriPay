@@ -21,7 +21,12 @@
         }).state('crew', {
             url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crew.tpl.html',
-            controller: 'CrewsCtrl'
+            controller: 'CrewCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         }).state('employees', {
             url: '/employees',
             templateUrl: 'app/crews/templates/employees.tpl.html',

@@ -28,9 +28,10 @@ ol ul{
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
+    width: 10px !important;
+    height: 10px !important;
     animation: spin 2s linear infinite;
+    text-align: center;
 }
 
 @keyframes spin {
@@ -38,8 +39,10 @@ ol ul{
     100% { transform: rotate(360deg); }
 }
 
-#loginbutton {
-    max-height: default;
+.submitbutton {
+    width: 5.5em !important;
+    height: 3em !important; 
+    vertical-align: middle;
 }
 
 /*--- Navigation ---*/

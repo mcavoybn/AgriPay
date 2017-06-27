@@ -1,15 +1,17 @@
 <div class="container">
     <div class="row">
-    <h1 class="text-center">
-            Employees            
-            <button class="btn btn-success" ng-click="addEmployee()">Add</button>
-        </h1>
-        <div class="row">
-            <ul>
-                <li ng-repeat="employee in employees">
-                    <p>{{employee.firstName}}</p>
-                </li>
-            </ul>
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Employees</h1>
+            <div id="employee-list">
+                <ul>
+                    <li ng-repeat="employee in employees">
+                        <h4 ng-click="selectEmployee(employee)">{{employee.firstName + " " + employee.lastName}}</h4>
+                        <p><em>Crew: {{employee.crew.name}}</em></p>
+                        <button class="btn btn-remove" ng-click="removeEmployee(employee)">Remove</button>
+                    </li>
+                </ul>
+                <button class="btn btn-success" ng-click="addEmployee()">Add</button>
+            </div>
         </div>
     </div>
 </div>

@@ -5,36 +5,22 @@
         .module('app')
         .controller('EmployeeCtrl', EmployeeCtrl);
 
-    EmployeeCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$stateParams', 'ModalService'];
+    EmployeeCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseObject', '$firebaseAuth', '$stateParams', 'ModalService'];
 
-    function EmployeeCtrl($scope, $state, $firebaseArray, $stateParams, ModalService) {
-        $scope.employee;
+    function EmployeeCtrl($scope, $state, $firebaseArray, $firebaseObject, $firebaseAuth, $stateParams, ModalService) {
         $scope.editEmployee = editEmployee;
         $scope.saveEmployee = saveEmployee;
+        $scope.goBack = goBack;
         $scope.isEditing = false;
+        $scope.employee;
         activate();
 
-        $scope.firstName;
-        $scope.lastName;
-        $scope.middle;
-        $scope.SSN;
-        $scope.gender;
-        $scope.dateOfBirth;
-        $scope.address1;
-        $scope.address2;
-        $scope.city;
-        $scope.state;
-        $scope.zipCode;
-        $scope.phoneNumber;
-        $scope.hourlyRate;
-
         function activate(){
-            var employeeRef = firebase.database().ref().child($stateParams.id).child('employees').child($stateParams.employeeId); 
+            var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
             $scope.employee = $firebaseObject(employeeRef);
-
             $scope.employee.$loaded().then((data) => {
                 $scope.employee = data;
-            });
+            });            
         }   
 
         function editEmployee(){
@@ -43,6 +29,11 @@
 
         function saveEmployee(){
             $scope.isEditing = false;
+            $scope.employee.$save();
+        }
+        
+        function goBack(){
+            $state.go('employees');
         }
     }
 })();

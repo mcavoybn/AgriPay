@@ -12,7 +12,12 @@
         .state('crews', {
             url: '/crews',
             templateUrl: 'app/crews/templates/crews.tpl.html',
-            controller: 'CrewsCtrl'
+            controller: 'CrewsCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         }).state('crew', {
             url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crew.tpl.html',
@@ -20,7 +25,12 @@
         }).state('employees', {
             url: '/employees',
             templateUrl: 'app/crews/templates/employees.tpl.html',
-            controller: 'EmployeesCtrl'
+            controller: 'EmployeesCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         }).state('employee', {
             url: '/employees/{id}',
             templateUrl: 'app/crews/templates/employees.tpl.html',

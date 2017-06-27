@@ -5,10 +5,10 @@
         .module('app')
         .controller('EmployeesCtrl', EmployeesCtrl);
 
-    EmployeesCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseAuth', '$stateParams', 'ModalService'];
+    EmployeesCtrl.$inject = ['$window', '$scope', '$state', '$firebaseArray', '$firebaseAuth', '$stateParams', 'ModalService'];
 
-    function EmployeesCtrl($scope, $state, $firebaseArray, $firebaseAuth, $stateParams, ModalService) {
-        $scope.employees;
+    function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, $stateParams, ModalService) {
+        $scope.employees = [];
         $scope.addEmployee = addEmployee;
         $scope.showAddEmployeeModal = showAddEmployeeModal;
         $scope.selectEmployee = selectEmployee;
@@ -29,25 +29,20 @@
         }
 
         function addEmployee(){
-            showAddEmployeeModal();
-        }
-
-        function showAddEmployeeModal(){
             ModalService.showModal({
-                templateUrl: 'app/crews/templates/addEmployeeModal.tpl.html',
-                controller: 'EmployeeModalCtrl'
-            }).then(function(modal){
+                templateUrl: 'app/crews/templates/addEmployee.tpl.html',
+                controller: 'AddEmployeeCtrl',
+                controllerAs: 'vm'
+            }).then((modal) => {
                 modal.element.modal();
-                modal.close.then((result) => {
-                    $('.modal-backdrop').remove();
-                    console.log('Closed ' + result);
-                });
-            });
         }
         
         function removeEmployee(employee){
             $scope.employees.forEach( (checkEmployee) => {
                 if(checkEmployee.$id == employee.$id) employees.$remoove(checkEmployee);
+                modal.close.then((employee) => {
+                    $scope.employees.$add(employee);
+                });
             });
             saveEmployees();
         }

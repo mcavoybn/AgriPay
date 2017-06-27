@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <base href="/">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="content/css/style.css" rel="stylesheet">
+        <title>AgriPay</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+    </head>
+    <body>
+        <div ui-view></div>
+        
+        <div navigation></div>
+
+        <!-- Node Modules -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="node_modules/firebase/firebase.js"></script>
+        <script src="node_modules/angularfire/dist/angularfire.min.js"></script>
+        <script src="node_modules/angular-modal-service/src/angular-modal-service.js"></script>
+        <script src="node_modules/ng-confirm/dist/ng-confirm.min.js"></script>
+
+        <!-- App Scripts -->
+        <script src="app/app.js"></script>
+        <script src="app/app.config.js"></script>
+        
+        <!-- Auth Scripts -->
+        <script src="app/auth/auth.routes.js"></script>
+        <script src="app/auth/controllers/login.ctrl.js"></script>
+        <script src="app/auth/controllers/register.ctrl.js"></script>
+        
+        <!-- Crew Scripts -->
+        <script src="app/crews/crews.routes.js"></script>
+        <script src="app/crews/controllers/crew.ctrl.js"></script>
+        <script src="app/crews/controllers/crews.ctrl.js"></script>
+        <script src="app/crews/controllers/employee.ctrl.js"></script>
+        <script src="app/crews/controllers/employees.ctrl.js"></script>
+        <script src="app/crews/controllers/addEmployee.ctrl.js"></script>
+        <script src="app/crews/controllers/selectCrew.ctrl.js"></script>
+        <script src="app/crews/controllers/selectEmployee.ctrl.js"></script>
+        <script src="app/crews/directives/employeeList/employeeList.ctrl.js"></script>
+        <script src="app/crews/directives/employeeList/employeeList.directive.js"></script>
+        <script src="app/crews/controllers/modal.ctrl.js"></script>
+        
+        <!-- Timekeeping Scripts -->
+        <script src="app/timekeeping/timekeeping.routes.js"></script>
+        <script src="app/timekeeping/controllers/timeCard.ctrl.js"></script>
+        <script src="app/timekeeping/controllers/timeEntry.ctrl.js"></script>
+        
+        <!-- Navigation Scripts -->
+        <script src="app/util/directives/navigation/navigation.directive.js"></script>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
     <!-- View -->
     <div class="row">
@@ -12,13 +12,14 @@
     <div class="row">
         <ul>
             <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
-                <img ng-src="{{crew.photo}}" height="50px" />
+                <a ui-sref="crewDetail"><img ng-src="{{crew.photo}}" height="50px" />
                 {{crew.name}}
                 <ul>
                     <li>
                         {{crew.count}} Employees in Crew
                     </li>
                 </ul>
+                </a>
             </li>
         </ul>
     </div>

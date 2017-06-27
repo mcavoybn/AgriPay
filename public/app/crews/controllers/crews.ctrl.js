@@ -24,6 +24,7 @@
             }).then((modal) => {
                 modal.element.modal();
                 modal.close.then((result) => {
+                    $('.modal-backdrop').remove();
                     console.log('Closed ' + result);
                 });
             });

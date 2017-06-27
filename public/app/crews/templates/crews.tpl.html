@@ -1,5 +1,5 @@
 <div class="container">
-    
+
     <!-- View -->
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
@@ -12,6 +12,7 @@
     <div class="row">
         <ul>
             <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
+                <img ng-src="{{crew.photo}}" height="50px" />
                 {{crew.name}}
                 <ul>
                     <li>
@@ -21,5 +22,5 @@
             </li>
         </ul>
     </div>
-    
+
 </div>

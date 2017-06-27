@@ -9,7 +9,10 @@
 
     function ModalCtrl ($scope, $state, $stateParams, $firebaseArray, close) {
         $scope.createCrew = createCrew;
-        $scope.close = close;
+        $scope.close = function(result) {
+            console.log("Result: " + result);
+            close(result, 400);
+        }
 
         activate();
 
@@ -30,15 +33,9 @@
                 photo: photo,
                 count: 0
             }).then((err) => {
-                $('.modal').remove();
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();                
+                           
             });
             /*$scope.employeeCount.length++;*/
-        }
-
-        function close() {
-            /* FIX THE MODAL CLOSING */
         }
     }
 })();

@@ -8,7 +8,6 @@
     EmployeeCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseObject', '$firebaseAuth', '$stateParams', 'ModalService'];
 
     function EmployeeCtrl($scope, $state, $firebaseArray, $firebaseObject, $firebaseAuth, $stateParams, ModalService) {
-        //$scope.employee;
         $scope.editEmployee = editEmployee;
         $scope.saveEmployee = saveEmployee;
         $scope.goBack = goBack;

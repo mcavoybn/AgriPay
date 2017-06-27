@@ -6,13 +6,36 @@
             <div id="employee-list" ng-hide="isEditing">
                 <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName}}</h3>
                 <ul>
-                    <li><em>ID:</em></li>
-                    <li>{{employee.id}}</li>
+                    <li><em>City:</em></li>
+                    <li>{{employee.city}}</li>
                     <li><em>Phone Number:</em></li>
-                    <li>{{employee.phoneNumber}}</li>
+                    <li>{{employee.phone}}</li>
                     <li><em>Hourly Rate:</em></li>
-                    <li>{{employee.hourlyRate}}</li>
+                    <li>{{employee.rate}}</li>
+                    <li><em>Crew:</em></li>
+                    <li>{{employee.crew}}</li>
                 </ul>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Show more info</button>
+                <div id="demo" class="collapse">
+                    <ul>
+                        <li><em>Address 1:</em></li>
+                        <li>{{employee.address1}}</li>
+                        <li><em>Address 2:</em></li>
+                        <li>{{employee.address2}}</li>
+                        <li><em>City:</em></li>
+                        <li>{{employee.city}}</li>
+                        <li><em>State:</em></li>
+                        <li>{{employee.state}}</li>
+                        <li><em>ZIP Code:</em></li>
+                        <li>{{employee.zip}}</li>
+                        <li><em>Date of Birth</em></li>
+                        <li>{{employee.dateOfBirth}}</li>
+                        <li><em>SSN:</em></li>
+                        <li>{{employee.ssn}}</li>
+                        <li><em>Gender:</em></li>
+                        <li>{{employee.gender}}</li>
+                    </ul>
+                </div>
                 <button class="btn btn-edit" ng-click="editEmployee()">Edit</button>
             </div>
             <div id="employee-list" ng-show="isEditing">
@@ -24,12 +47,36 @@
                     <li><input type="text" ng-model="employee.middle" value="employee.middle"></li>
                     <li><em>Last Name:</em></li>
                     <li><input type="text" ng-model="employee.lastName" value="employee.lastName"></li>
-                    <li><em>ID:</em></li>
-                    <li>{{employee.id}}</li>
                     <li><em>Phone Number:</em></li>
                     <li><input type="text" ng-model="employee.phoneNumber" value="employee.phoneNumber"></li>
                     <li><em>Hourly Rate:</em></li>
-                    <li><input type="number" ng-model="employee.hourlyRate" value="employee.hourlyRate"></li>
+                    <li><input type="text" ng-model="employee.hourlyRate" value="employee.hourlyRate"></li>
+                    <li><em>Address 1:</em></li>
+                    <li><input type="text" ng-model="employee.address1" value="employee.address1"></li>
+                    <li><em>Address 2:</em></li>
+                    <li><input type="text" ng-model="employee.address2" value="employee.address2"></li>
+                    <li><em>City:</em></li>
+                    <li><input type="text" ng-model="employee.city" value="employee.city"></li>
+                    <li><em>State:</em></li>
+                    <li><input type="text" ng-model="employee.state" value="employee.state"></li>
+                    <li><em>Zip Code:</em></li>
+                    <li><input type="text" ng-model="employee.zip" value="employee.zip"></li>
+                    <li><em>Date of Birth:</em></li>
+                    <li><input type="text" ng-model="employee.dateOfBirth" value="employee.dateOfBirth"></li>
+                    <li><em>SSN:</em></li>
+                    <li><input type="text" ng-model="employee.ssn" value="employee.ssn"></li>
+                    <li><em>Gender:</em></li>
+                    <li><input type="text" ng-model="employee.gender" value="employee.gender"></li>
+                    <li><em>Crew:</em></li>
+                    <select ng-model="employee.crew">
+                        <!--                        <option ng-repeat="crew in crews" value="crew.name">crew.name</option>-->
+                    </select>
+                    <li><em>Employment Status:</em></li>
+                    <select ng-model="vm.employee.type">
+                        <option value="w2">W2</option>
+                        <option value="1099">1099</option>
+                        <option value="H2A">H2A</option>
+                    </select>
                     <button class="btn btn-save" ng-click="saveEmployee()">Save</button>
                 </ul>
             </div>

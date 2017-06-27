@@ -7,6 +7,7 @@
                     <li ng-repeat="employee in employees">
                         <h4 ng-click="selectEmployee(employee)">{{employee.firstName + " " + employee.lastName}}</h4>
                         <p><em>Crew: {{employee.crew.name}}</em></p>
+                        <button class="btn btn-remove" ng-click="removeEmployee(employee)">Remove</button>
                     </li>
                 </ul>
                 <button class="btn btn-success" ng-click="addEmployee()">Add</button>

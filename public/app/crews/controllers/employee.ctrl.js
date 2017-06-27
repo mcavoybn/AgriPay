@@ -44,7 +44,6 @@
             }else{
                 $scope.clickedShow = false;
             }
-
         }
     }
 })();

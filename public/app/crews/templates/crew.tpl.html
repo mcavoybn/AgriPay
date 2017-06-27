@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    
+    <!-- View -->
+    <div class="row">
+        <img ng-src="{{crew.photo}}" />
+    </div>
+    <div class="row">
+        {{crew.photo}}
+    </div>
+    <div class="row">
+        {{crew.name}}
+    </div>
+    <div class="row">
+        {{crew.manager}}
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" ng-click="editCrew()" id="crewEditButton">Edit</button>
+        <button class="btn btn-primary" ng-click="addEmployeeToCrew()" id="crewAddEmployeeButton">Add Employees</button>
+    </div>
+    <div class="row">
+        <ul>
+            <li ng-repeat="employee in crew | orderBy: 'name'">
+        </ul>
+    </div>
+    
+    <!-- Edit -->
+    <div class="row" ng-show="isEditingCrew">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="crews.photo" placeholder="Crew Image URL"> 
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="crews.name" placeholder="Crew Name"> 
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="crews.manager" placeholder="Crew Manager"> 
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -5,9 +5,9 @@
     .module('app')
     .controller('CrewCtrl', CrewCtrl);
     
-    CrewCtrl.$inject = ['$scope', '$stateParams', '$firebaseObject', '$firebaseAuth'];
+    CrewCtrl.$inject = ['$scope', '$state', '$stateParams', '$firebaseObject', '$firebaseArray', '$firebaseAuth'];
     
-    function CrewCtrl($scope, $stateParams, $firebaseObject, $firebaseAuth) {
+    function CrewCtrl($scope, $state, $stateParams, $firebaseObject, $firebaseArray, $firebaseAuth) {
         $scope.isEditingCrew = false;
         $scope.editCrew = editCrew;
         $scope.saveCrew = saveCrew;
@@ -19,6 +19,8 @@
         function activate() {
             var crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
             $scope.crew = $firebaseObject(crewRef);
+            var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid);
+            $scope.employees = $firebaseArray(employeeRef.child('employees').orderByChild('crewID').equalTo($scope.crew.$id));
         }
         
         function editCrew() {
@@ -41,7 +43,12 @@
         }
         
         function deleteCrew() {
-            $scope.crew.$remove();
+            $scope.crew.$remove().then((data) => {
+                $state.go('crews');
+            }).catch((error) => {
+                console.log(error);
+            });
+            
         }
     }
 })();

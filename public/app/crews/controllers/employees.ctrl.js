@@ -10,12 +10,13 @@
     function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, $stateParams, ModalService) {
         $scope.employees = [];
         $scope.addEmployee = addEmployee;
+        $scope.selectEmployee = selectEmployee;
+        $scope.removeEmployee = removeEmployee;
         activate();
 
-        function activate(){ 
-            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
-            $scope.employees = $firebaseArray(employeesRef); 
-
+        function activate(){
+            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+            $scope.employees = $firebaseArray(employeesRef);
             $scope.employees.$loaded().then((data) => {
                 $scope.employees = data;
             });
@@ -31,6 +32,21 @@
                 modal.close.then((employee) => {
                     $scope.employees.$add(employee);
                 });
+            });
+        }
+        
+        function removeEmployee(employee){
+            $scope.employees.$remove(employee);
+        }
+
+        function selectEmployee(employee){
+            console.log(employee.$id);
+            $state.go('employee', { employeeId: employee.$id} );
+        }
+        
+        function saveEmployees(){
+            $scope.employees.forEach((employee) => {                
+                $scope.employees.$save(employees); 
             });
         }
     }

@@ -8,7 +8,7 @@
     AddEmployeeCtrl.$inject = ['$scope', 'close'];
 
     function AddEmployeeCtrl($scope, close) {
-        var vm = this;
+         var vm = this;
         vm.employee = {};
 
         vm.submit = () => {close(vm.employee, 500);};

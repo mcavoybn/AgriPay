@@ -5,33 +5,36 @@
                 <button type="button" class="close" ng-click="vm.cancel()" data-dismiss="modal">&times;</button>
                 <h3>Add New Employee</h3>
             </div>
-            <div class="modal-body">                       
-                <div class="form-group">
-                    Type:
-                    <select ng-model="vm.employee.type">
-                        <option value="w2">W2</option>
-                        <option value="1099">1099</option>
-                        <option value="H2A">H2A</option>
-                    </select>
-                    Gender:
-                    <select ng-model="employee.gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                    <input type="text" class="form-control" ng-model="vm.employee.firstName" placeholder="First Name" autofocus />
-                    <input type="text" class="form-control" ng-model="vm.employee.lastName" placeholder="Last Name" />
-                    <input type="text" class="form-control" ng-model="vm.employee.middle" placeholder="Middle" />  
-                    <input type="number" class="form-control" ng-model="vm.employee.ssn" placeholder="SSN" />
-                    <!-- Firefox functionality for date is WONKY AF -->
-                    <input type="date" class="form-control" ng-model="vm.employee.dateOfBirth" placeholder="Date of Birth" />
-                    <input type="text" class="form-control" ng-model="vm.employee.address1" placeholder="Address 1" />
-                    <input type="text" class="form-control" ng-model="vm.employee.address2" placeholder="Address 2" />
-                    <input type="text" class="form-control" ng-model="vm.employee.city" placeholder="City" />
-                    <input type="text" class="form-control" ng-model="vm.employee.state" placeholder="State" />
-                    <input type="text" class="form-control" ng-model="vm.employee.zip" placeholder="ZIP code" />
-                    <input type="text" class="form-control" ng-model="vm.employee.phone" placeholder="Phone Number" />
-                    <input type="text" class="form-control" ng-model="vm.employee.rate" placeholder="Hourly Rate" />
-                </div>
+
+            <div class="modal-body">   
+                <form ng-submit="submit()">     
+                    <div class="form-group">
+                        Type:
+                        <select ng-model="vm.employee.type">
+                            <option value="w2">W2</option>
+                            <option value="1099">1099</option>
+                            <option value="H2A">H2A</option>
+                        </select>
+                        Gender:
+                        <select ng-model="vm.employee.gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <input type="text" class="form-control" ng-model="vm.employee.firstName" placeholder="First Name" autofocus />
+                        <input type="text" class="form-control" ng-model="vm.employee.lastName" placeholder="Last Name" />
+                        <input type="text" class="form-control" ng-model="vm.employee.middle" placeholder="Middle" />  
+                        <input type="text" class="form-control" ng-model="vm.employee.ssn" placeholder="SSN" />
+<!--                        Change this to type=date eventualy-->
+                        <input type="text" class="form-control" ng-model="vm.employee.dateOfBirth" placeholder="Date of Birth" />
+                        <input type="text" class="form-control" ng-model="vm.employee.address1" placeholder="Address 1" />
+                        <input type="text" class="form-control" ng-model="vm.employee.address2" placeholder="Address 2" />
+                        <input type="text" class="form-control" ng-model="vm.employee.city" placeholder="City" />
+                        <input type="text" class="form-control" ng-model="vm.employee.state" placeholder="State" />
+                        <input type="text" class="form-control" ng-model="vm.employee.zip" placeholder="ZIP code" />
+                        <input type="text" class="form-control" ng-model="vm.employee.phone" placeholder="Phone Number" />
+                        <input type="text" class="form-control" ng-model="vm.employee.rate" placeholder="Hourly Rate" />
+                    </div>
+                </form>
             </div>
             <!-- SUBMIT MUST GO IN MODAL FOOTER!!! -->
             <div class="modal-footer">

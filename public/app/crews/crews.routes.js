@@ -37,9 +37,14 @@
                 }]
             }
         }).state('employee', {
-            url: '/employees/{id}',
-            templateUrl: 'app/crews/templates/employees.tpl.html',
-            controller: 'EmployeesCtrl'
+            url: '/employees/{employeeId}',
+            templateUrl: 'app/crews/templates/employee.tpl.html',
+            controller: 'EmployeeCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         });
     }
 })();

@@ -9,26 +9,19 @@
 
     function LoginCtrl($scope, $state, $firebaseAuth) {
         $scope.submit = submit;
-        $scope.email;
-        $scope.password;
         $scope.message = "";
-        $scope.uid;
         $scope.clickedLogin = false;
         
         function submit(){
             $scope.clickedLogin = true;
-            return $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
-                .then( (data) => { 
-                    $scope.uid = data.uid;
-                    $state.go('crews', { id: data.uid } ); 
-                })
-                .catch( (error) => { 
-                    $scope.message = error.message; 
-                });                                                                                                   
-        }
-        
-        function forgottenPassword(){
-//            return state.go('forgotPassword');
+
+            $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
+            .then( (data) => {
+                $state.go('crews'); 
+            })
+            .catch( (error) => { 
+                $scope.message = error.message; 
+            });                                                                                                   
         }
     }
 })();

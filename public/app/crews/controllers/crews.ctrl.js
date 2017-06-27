@@ -5,14 +5,16 @@
     .module('app')
     .controller('CrewsCtrl', CrewsCtrl);
     
-    CrewsCtrl.$inject = ['$scope', '$stateParams', '$firebaseArray'];
+    CrewsCtrl.$inject = ['$scope', '$firebaseAuth', '$firebaseArray'];
     
-    function CrewsCtrl($scope, $stateParams, $firebaseArray) {
+    function CrewsCtrl($scope, $firebaseAuth, $firebaseArray) {
+        console.log($firebaseAuth().$getAuth());
+
         activate();
         
         function activate() {
-            var CrewsRef = firebase.database().ref().child($stateParams.id).child('crews');
-            $scope.crews = $firebaseArray(CrewsRef);
+            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            $scope.crews = $firebaseArray(crewsRef);
         }
     }
 })();

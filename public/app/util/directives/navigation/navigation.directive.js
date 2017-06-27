@@ -11,8 +11,7 @@
         var directive = {
             replace: true,
             restrict: 'EA',
-            templateUrl: 'app/util/directives/navigation/navigation.tpl.html',
-            controller: 'NavigationCtrl'
+            templateUrl: 'app/util/directives/navigation/navigation.tpl.html'
         };
         
         return directive;

@@ -9,36 +9,30 @@
 
     function EmployeeModalCtrl($scope, $state, $stateParams, $firebaseArray, $firebaseAuth, ModalService) {
         $scope.employees;
+        $scope.submit = submit;
         activate();
-
-        $scope.firstName;
-        $scope.lastName;
-        $scope.middle;
-        $scope.SSN;
-        $scope.gender;
-        $scope.dateOfBirth;
-        $scope.address1;
-        $scope.address2;
-        $scope.city;
-        $scope.state;
-        $scope.zipCode;
-        $scope.phoneNumber;
-        $scope.hourlyRate;
+               
+        $scope.lastName = null;
+        $scope.middle = null;
+        $scope.SSN = null;
+        $scope.gender = null;
+        $scope.dateOfBirth = null;
+        $scope.address1 = null;
+        $scope.address2 = null;
+        $scope.city= null;
+        $scope.state= null;
+        $scope.zipCode= null;
+        $scope.phoneNumber= null;
+        $scope.hourlyRate= null;
+        $scope.crew = {
+          id: null,
+          name: "Crew Not Assigned!",
+          photo: null
+        };
 
         function activate(){
-            var authObj = $firebaseAuth($stateParams.id);
-            var authData = authObj.$getAuth();
-            console.log('authData=')
-            console.log(authData);
-            var uid;
-            if(authData){
-                uid = authData.uid;
-                var employeesRef = firebase.database().ref().child(uid).child('employees'); 
-                $scope.employees = $firebaseArray(employeesRef);
-            }else{
-                var employeesRef = firebase.database().ref().child("no-uid").child('employees'); 
-                $scope.employees = $firebaseArray(employeesRef);
-            }    
+            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+            $scope.employees = $firebaseArray(employeesRef);
             $scope.employees.$loaded().then((data) => {
                 $scope.employees = data;
             });
@@ -60,8 +54,14 @@
                 phoneNumber: $scope.phoneNumber,
                 hourlyRate: $scope.hourlyRate
             }
-            employees.$add(newEmployee);
-            employees.$save();
+            $scope.employees.$add(newEmployee);
+            saveEmployees();
+        }
+        
+        function saveEmployees(){
+            $scope.employees.forEach((employee) => {                
+                $scope.employees.$save(employees); 
+            });
         }
     }
 })();

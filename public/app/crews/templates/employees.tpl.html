@@ -5,7 +5,8 @@
             <div id="employee-list">
                 <ul>
                     <li ng-repeat="employee in employees">
-                        <p></p>
+                        <h4>{{employee.firstName + " " + employee.lastName}}</h4>
+                        <p><em>Crew: {{employee.crew.name}}</em></p>
                     </li>
                 </ul>
             </div>

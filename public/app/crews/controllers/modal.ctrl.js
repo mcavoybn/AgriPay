@@ -5,19 +5,18 @@
         .module('app')
         .controller('ModalCtrl', ModalCtrl);
 
-    ModalCtrl.$inject = ['$scope', '$state', '$stateParams', '$firebaseArray', 'close'];
+    ModalCtrl.$inject = ['$scope', '$state', '$firebaseAuth', '$firebaseArray', 'close'];
 
-    function ModalCtrl ($scope, $state, $stateParams, $firebaseArray, close) {
+    function ModalCtrl ($scope, $state, $firebaseAuth, $firebaseArray, close) {
         $scope.createCrew = createCrew;
         $scope.close = function(result) {
-            console.log("Result: " + result);
             close(result, 400);
         }
 
         activate();
 
         function activate() {
-            var crewsRef = firebase.database().ref().child($stateParams.id).child('crews');
+            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
         }
 

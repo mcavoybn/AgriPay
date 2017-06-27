@@ -11,6 +11,8 @@
         $scope.employees;
         $scope.addEmployee = addEmployee;
         $scope.showAddEmployeeModal = showAddEmployeeModal;
+        $scope.selectEmployee = selectEmployee;
+        $scope.removeEmployee = removeEmployee;
         activate();
         
         $scope.close = function(result) {
@@ -24,7 +26,6 @@
             $scope.employees.$loaded().then((data) => {
                 $scope.employees = data;
             });
-            console.log($scope.employees);
         }
 
         function addEmployee(){
@@ -40,7 +41,7 @@
                 modal.close.then((result) => {
                     $('.modal-backdrop').remove();
                     console.log('Closed ' + result);
-                });;
+                });
             });
         }
         
@@ -52,7 +53,8 @@
         }
 
         function selectEmployee(employee){
-            $state.go('employee', {id:$stateParams.id, employeeId: employee.$id} );
+            console.log(employee.$id);
+            $state.go('employee', { employeeId: employee.$id} );
         }
         
         function saveEmployees(){

@@ -21,7 +21,12 @@
         }).state('crew', {
             url: '/crews/{id}',
             templateUrl: 'app/crews/templates/crew.tpl.html',
-            controller: 'CrewsCtrl'
+            controller: 'CrewsCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         }).state('employees', {
             url: '/employees',
             templateUrl: 'app/crews/templates/employees.tpl.html',
@@ -32,9 +37,14 @@
                 }]
             }
         }).state('employee', {
-            url: '/employees/{id}',
-            templateUrl: 'app/crews/templates/employees.tpl.html',
-            controller: 'EmployeesCtrl'
+            url: '/employees/{employeeId}',
+            templateUrl: 'app/crews/templates/employee.tpl.html',
+            controller: 'EmployeeCtrl',
+            resolve: {
+                "currentAuth": ["$firebaseAuth", ($firebaseAuth) => {
+                    return $firebaseAuth().$waitForSignIn();
+                }]
+            }
         });
     }
 })();

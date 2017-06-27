@@ -10,7 +10,6 @@
     function ModalCtrl ($scope, $state, $firebaseAuth, $firebaseArray, close) {
         $scope.createCrew = createCrew;
         $scope.close = function(result) {
-            console.log("Result: " + result);
             close(result, 400);
         }
 

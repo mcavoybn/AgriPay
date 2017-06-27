@@ -12,5 +12,5 @@
     firebase.initializeApp(config);
 
 	angular
-		.module('app', ['ui.router', 'firebase', 'angularModalService']);
+		.module('app', ['ui.router', 'firebase', 'angularModalService', 'ngConfirm']);
 })();

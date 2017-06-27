@@ -8,23 +8,20 @@
     LoginCtrl.$inject = ['$scope', '$state', '$firebaseAuth'];
 
     function LoginCtrl($scope, $state, $firebaseAuth) {
-        $scope.submit;
-        $scope.email;
-        $scope.password;
+        $scope.submit = submit;
         $scope.message = "";
+        $scope.clickedLogin = false;
         
         function submit(){
-            return $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
-                .then( (data) => { 
-                    state.go('crews', { id: data.uid } ); 
-                })
-                .catch( (error) => { 
-                    $scope.message = error; 
-                });                                                                                                   
-        }
-        
-        function forgottenPassword(){
-//            return state.go('forgotPassword');
+            $scope.clickedLogin = true;
+
+            $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
+            .then( (data) => {
+                $state.go('crews'); 
+            })
+            .catch( (error) => { 
+                $scope.message = error.message; 
+            });                                                                                                   
         }
     }
 })();

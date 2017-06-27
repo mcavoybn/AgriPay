@@ -1,5 +1,5 @@
 {
-  "name": "AgriPay app",
+  "name": "AgriPay",
   "version": "1.0.0",
   "description": "An application to make time tracking for farmers quick and easy",
   "main": "app.js",

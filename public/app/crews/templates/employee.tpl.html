@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Employees</h1>
+            <div id="employee-list" ng-hide="isEditing">
+                <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName</h3>
+                <ul>
+                    <li><em>ID:</em></li>
+                    <li>{{employee.id}}</li>
+                    <li><em>Phone Number:</em></li>
+                    <li>{{employee.phoneNumber}}</li>
+                    <li><em>Hourly Rate:</em></li>
+                    <li>{{employee.hourlyRate}}</li>
+                </ul>
+                <button class="btn btn-edit" ng-click="editEmployee()">Edit</button>
+            </div>
+            <div id="employee-list" ng-show="isEditing">
+                <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName</h3>
+                <ul>
+                    <li><em>First Name:</em></li>
+                    <li><input type="text" ng-model="firstName" value="firstName"></li>
+                    <li><em>Middle:</em></li>
+                    <li><input type="text" ng-model="middle" value="middle"></li>
+                    <li><em>Last Name:</em></li>
+                    <li><input type="text" ng-model="lastName" value="lastName"></li>
+                    <li><em>ID:</em></li>
+                    <li>{{employee.id}}</li>
+                    <li><em>Phone Number:</em></li>
+                    <li><input type="text" ng-model="phoneNumber" value="phoneNumber"></li>
+                    <li><em>Hourly Rate:</em></li>
+                    <li><input type="number" ng-model="hourlyRate" value="hourlyRate"></li>
+                    <button class="btn btn-save" ng-click="saveEmployee()">Save</button>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

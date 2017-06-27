@@ -13,6 +13,8 @@
         $scope.goBack = goBack;
         $scope.isEditing = false;
         $scope.employee;
+        $scope.clickedShow = false;
+        $scope.clickShow = clickShow;
         activate();
 
         function activate(){
@@ -34,6 +36,15 @@
         
         function goBack(){
             $state.go('employees');
+        }
+
+        function clickShow(){
+            if($scope.clickedShow == false){
+                $scope.clickedShow = true;
+            }else{
+                $scope.clickedShow = false;
+            }
+
         }
     }
 })();

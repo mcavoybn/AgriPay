@@ -5,11 +5,16 @@
         .module('app')
         .controller('TimeCardCtrl', TimeCardCtrl);
 
-    TimeCardCtrl.$inject = ['$scope', 'close'];
+    TimeCardCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
 
-    function TimeCardCtrl($scope, close) {
+    function TimeCardCtrl($scope, close, $firebaseAuth, $firebaseArray) {
         var vm2 = this;
-        vm2.employee = {};
+        
+        var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+        $scope.crews = $firebaseArray(crewsRef);
+        $scope.crews.$loaded().then((data) => {
+            $scope.crews = data;
+        });
 
         vm2.submit = () => {close(vm2.timeCard, 500);};
         vm2.cancel = () => {close({}, 500);};

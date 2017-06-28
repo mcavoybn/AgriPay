@@ -53,22 +53,24 @@
         }
 
         function clockInCrew(crew) {
-            crew.employees.forEach(employee => {
-                var newTimeEntry = {
-                    timeIn: getCurrentDateAndTime(),
-                    timeOut: null,
-                    timeCardId: null,
-                    employee: {
-                        id: employee.$id,
-                        employeeId: employee.employeeId,
-                        firstName: employee.firstName,
-                        lastName: employee.lastName,
-                        crew: employee.crew
-                    }
-                };
-                $scope.timeEntries.$add(newTimeEntry);
+            $scope.employees.forEach(employee => {
+                if(employee.crew == crew){
+                    var newTimeEntry = {
+                        timeIn: getCurrentDateAndTime(),
+                        timeOut: null,
+                        timeCardId: null,
+                        employee: {
+                            id: employee.$id,
+                            employeeId: employee.employeeId,
+                            firstName: employee.firstName,
+                            lastName: employee.lastName,
+                            crew: employee.crew
+                        }
+                    };
+                    $scope.timeEntries.$add(newTimeEntry); 
+                }                
             });
-
+            
         }
 
         function clockOutCrew(crew) {
@@ -122,6 +124,9 @@
             }).then((modal) => {
                 modal.element.modal();
                 modal.close.then((timeCard) => {
+                    $scope.timeEntries.forEach( entry => {
+                       if(!entry.hasOwnProperty('timeCardId')) entry.timeCardId = timeCard.$id; 
+                    });
                     $scope.timeCards.$add(timeCard);
                 });
             });

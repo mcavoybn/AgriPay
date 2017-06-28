@@ -9,6 +9,7 @@
 body{
     background-color:#fff;
     overflow-x: hidden;    
+    padding-bottom: 65px;
 }
 
 ol ul{
@@ -21,9 +22,11 @@ ol ul{
     border: none;
 }
 
-.glyphicon{
+.glyphicon {
     font-size:4em;
 }
+
+/*--- Employees ---*/
 
 /*--- Home ---*/
 

@@ -21,7 +21,7 @@
         $scope.showCrewsTab = showCrewsTab;
         $scope.showEmployeesTab = showEmployeesTab;
         $scope.isShowingCrews = true;
-        
+
         $scope.showTimeCardModal = showTimeCardModal;
 
         activate();
@@ -53,29 +53,19 @@
         }
 
         function clockInCrew(crew) {
+            console.log("you clicked clock in crew")
             $scope.employees.forEach(employee => {
-                if(employee.crew == crew){
-                    var newTimeEntry = {
-                        timeIn: getCurrentDateAndTime(),
-                        timeOut: null,
-                        timeCardId: null,
-                        employee: {
-                            id: employee.$id,
-                            employeeId: employee.employeeId,
-                            firstName: employee.firstName,
-                            lastName: employee.lastName,
-                            crew: employee.crew
-                        }
-                    };
-                    $scope.timeEntries.$add(newTimeEntry); 
-                }                
+                if (employee.crew == crew.name) {
+                    console.log(employee);
+                    clockInEmployee(employee);
+                }
             });
-            
+
         }
 
         function clockOutCrew(crew) {
-            $scope.timeEntries.forEach(entry => {
-                if (entry.employee.crew == crew) {
+            $scope.timeEntries.forEach( entry => {
+                if (entry.employee.crew == crew.name) {
                     entry.timeOut = getCurrentDateAndTime();
                     $scope.timeEntries.$save(entry);
                 }
@@ -99,13 +89,12 @@
         }
 
         function clockOutEmployee(employee) {
-            $scope.timeEntries.forEach((entry) => {
+            $scope.timeEntries.forEach( entry => {
                 if (entry.employee.id == employee.$id) {
                     entry.timeOut = getCurrentDateAndTime();
                     $scope.timeEntries.$save(entry);
                 }
-            })
-
+            });
         }
 
         function showCrewsTab() {
@@ -115,8 +104,8 @@
         function showEmployeesTab() {
             $scope.isShowingCrews = false;
         }
-        
-        function showTimeCardModal(){
+
+        function showTimeCardModal() {
             ModalService.showModal({
                 templateUrl: 'app/timekeeping/templates/timeCard.tpl.html',
                 controller: 'TimeCardCtrl',
@@ -124,8 +113,8 @@
             }).then((modal) => {
                 modal.element.modal();
                 modal.close.then((timeCard) => {
-                    $scope.timeEntries.forEach( entry => {
-                       if(!entry.hasOwnProperty('timeCardId')) entry.timeCardId = timeCard.$id; 
+                    $scope.timeEntries.forEach(entry => {
+                        if (!entry.hasOwnProperty('timeCardId')) entry.timeCardId = timeCard.$id;
                     });
                     $scope.timeCards.$add(timeCard);
                 });

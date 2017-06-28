@@ -6,19 +6,19 @@
             <div id="employee-list" ng-hide="isEditing">
                 <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName}}</h3>
                 <ul>
-                    <li><em>City:</em>{{employee.city}}</li>
-                    <li><em>Phone Number:</em>{{employee.phone}}</li>
-                    <li><em>Hourly Rate:</em>{{employee.rate}}</li>
-                    <li><em>Crew:</em>{{employee.crew}}</li>
-                    <li><em>Employee ID:</em>{{employee.employeeId}}</li>
-                    <li><em>Address 1:</em>{{employee.address1}}</li>
-                    <li><em>Address 2:</em>{{employee.address2}}</li>
-                    <li><em>City:</em>{{employee.city}}</li>
-                    <li><em>State:</em>{{employee.state}}</li>
-                    <li><em>ZIP Code:</em>{{employee.zip}}</li>
-                    <li><em>Date of Birth</em>{{employee.dateOfBirth}}</li>
-                    <li><em>SSN:</em>{{employee.ssn}}</li>
-                    <li><em>Gender:</em>{{employee.gender}}</li>
+                    <li><em>City: </em>{{employee.city}}</li>
+                    <li><em>Phone Number: </em>{{employee.phone}}</li>
+                    <li><em>Hourly Rate: </em>{{employee.rate}}</li>
+                    <li><em>Crew: </em>{{employee.crew}}</li>
+                    <li><em>Employee ID: </em>{{employee.employeeId}}</li>
+                    <li><em>Address 1: </em>{{employee.address1}}</li>
+                    <li><em>Address 2: </em>{{employee.address2}}</li>
+                    <li><em>City: </em>{{employee.city}}</li>
+                    <li><em>State: </em>{{employee.state}}</li>
+                    <li><em>ZIP Code: </em>{{employee.zip}}</li>
+                    <li><em>Date of Birth </em>{{employee.dateOfBirth}}</li>
+                    <li><em>SSN: </em>{{employee.ssn}}</li>
+                    <li><em>Gender: </em>{{employee.gender}}</li>
                 </ul>
                 <button class="btn btn-edit" ng-click="editEmployee()">Edit</button>
             </div>
@@ -58,8 +58,6 @@
                     <li><input type="text" ng-model="employee.ssn" value="employee.ssn"></li>
                     <li><em>Gender:</em></li>
                     <li><input type="text" ng-model="employee.gender" value="employee.gender"></li>
-                    <li><em>Crew:</em></li>
-                    
                     <li><em>Employment Status:</em></li>
                     <select ng-model="employee.type">
                         <option value="w2">W2</option>
@@ -69,7 +67,6 @@
                     <button class="btn btn-save" ng-click="saveEmployee()">Save</button>
                 </ul>
             </div>
-
         </div>
     </div>
 </div>

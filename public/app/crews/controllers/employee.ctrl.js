@@ -16,6 +16,8 @@
         $scope.assignCrew = assignCrew;
         $scope.clickedShow = false;
         $scope.clickShow = clickShow;
+        
+        activate();
 
         function activate(){
             var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
@@ -23,6 +25,8 @@
             $scope.employee.$loaded().then((data) => {
                 $scope.employee = data;
             });            
+            console.log("employee=")
+            console.log($scope.employee)
             
             var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);

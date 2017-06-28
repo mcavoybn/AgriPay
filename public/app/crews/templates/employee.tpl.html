@@ -6,43 +6,24 @@
             <div id="employee-list" ng-hide="isEditing">
                 <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName}}</h3>
                 <ul>
-                    <li><em>City:</em></li>
-                    <li>{{employee.city}}</li>
-                    <li><em>Phone Number:</em></li>
-                    <li>{{employee.phone}}</li>
-                    <li><em>Hourly Rate:</em></li>
-                    <li>{{employee.rate}}</li>
-                    <li><em>Crew:</em></li>
-                    <li>{{employee.crew}}</li>
+                    <li><em>City:</em>{{employee.city}}</li>
+                    <li><em>Phone Number:</em>{{employee.phone}}</li>
+                    <li><em>Hourly Rate:</em>{{employee.rate}}</li>
+                    <li><em>Crew:</em>{{employee.crew}}</li>
+                    <li><em>Employee ID:</em>{{employee.employeeId}}</li>
+                    <li><em>Address 1:</em>{{employee.address1}}</li>
+                    <li><em>Address 2:</em>{{employee.address2}}</li>
+                    <li><em>City:</em>{{employee.city}}</li>
+                    <li><em>State:</em>{{employee.state}}</li>
+                    <li><em>ZIP Code:</em>{{employee.zip}}</li>
+                    <li><em>Date of Birth</em>{{employee.dateOfBirth}}</li>
+                    <li><em>SSN:</em>{{employee.ssn}}</li>
+                    <li><em>Gender:</em>{{employee.gender}}</li>
                 </ul>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo" ng-click="clickShow()">
-                    <div ng-hide="clickedShow">Show more info</div>
-                    <div ng-show="clickedShow">Show less info</div>
-                </button>
-                <div id="demo" class="collapse">
-                    <ul>
-                        <li><em>Address 1:</em></li>
-                        <li>{{employee.address1}}</li>
-                        <li><em>Address 2:</em></li>
-                        <li>{{employee.address2}}</li>
-                        <li><em>City:</em></li>
-                        <li>{{employee.city}}</li>
-                        <li><em>State:</em></li>
-                        <li>{{employee.state}}</li>
-                        <li><em>ZIP Code:</em></li>
-                        <li>{{employee.zip}}</li>
-                        <li><em>Date of Birth</em></li>
-                        <li>{{employee.dateOfBirth}}</li>
-                        <li><em>SSN:</em></li>
-                        <li>{{employee.ssn}}</li>
-                        <li><em>Gender:</em></li>
-                        <li>{{employee.gender}}</li>
-                    </ul>
-                </div>
                 <button class="btn btn-edit" ng-click="editEmployee()">Edit</button>
             </div>
             <div id="employee-list" ng-show="isEditing">
-                <h3>Edit Employee Info</h3>
+                <h1>Edit Employee Info</h1>
                 <ul>
                     <li><em>First Name:</em></li>
                     <li><input type="text" ng-model="employee.firstName" value="employee.firstName"></li>
@@ -54,6 +35,13 @@
                     <li><input type="text" ng-model="employee.phoneNumber" value="employee.phoneNumber"></li>
                     <li><em>Hourly Rate:</em></li>
                     <li><input type="text" ng-model="employee.hourlyRate" value="employee.hourlyRate"></li>
+                    <li><em>Select Crew:</em></li>
+                    <select ng-model="employee.crew">
+                        <option ng-click="assignCrew('No Crew')">No Crew</option>
+                        <option ng-repeat="crew in crews" ng-click="assignCrew(crew)">{{crew.name}}</option>
+                    </select>
+                    <li><em>Employee ID:</em></li>
+                    <li><input type="text" ng-model="employee.employeeId" value="employee.employeeId"></li>
                     <li><em>Address 1:</em></li>
                     <li><input type="text" ng-model="employee.address1" value="employee.address1"></li>
                     <li><em>Address 2:</em></li>
@@ -71,10 +59,7 @@
                     <li><em>Gender:</em></li>
                     <li><input type="text" ng-model="employee.gender" value="employee.gender"></li>
                     <li><em>Crew:</em></li>
-                    <select ng-model="employee.crew">
-                            <option ng-click="assignCrew('No Crew')">No Crew</option>
-                            <option ng-repeat="crew in crews" ng-click="assignCrew(crew)">{{crew.name}}</option>
-                    </select>
+                    
                     <li><em>Employment Status:</em></li>
                     <select ng-model="employee.type">
                         <option value="w2">W2</option>

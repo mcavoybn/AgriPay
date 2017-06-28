@@ -7,9 +7,9 @@
 
     ModalCtrl.$inject = ['$scope', '$state', '$firebaseAuth', '$firebaseArray', 'close'];
 
-    function ModalCtrl ($scope, $state, $firebaseAuth, $firebaseArray, close) {
+    function ModalCtrl($scope, $state, $firebaseAuth, $firebaseArray, close) {
         $scope.createCrew = createCrew;
-        $scope.close = function(result) {
+        $scope.close = function (result) {
             close(result, 400);
         }
 
@@ -28,7 +28,7 @@
                 photo: $('#photo').val(),
                 count: 0
             }).then((err) => {
-                console.log(err);  
+                console.log(err);
             });
             /*$scope.employeeCount.length++;*/
         }

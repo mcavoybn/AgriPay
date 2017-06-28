@@ -8,11 +8,6 @@
     TimeEntryCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseObject', '$firebaseAuth', 'ModalService'];
 
     function TimeEntryCtrl($scope, $state, $firebaseArray, $firebaseObject, $firebaseAuth, ModalService) {
-        $scope.crews;
-        $scope.employees;
-        $scope.timeEntries;
-        $scope.timeCards;
-
         $scope.clockInCrew = clockInCrew;
         $scope.clockOutCrew = clockOutCrew;
         $scope.clockInEmployee = clockInEmployee;
@@ -63,7 +58,7 @@
         }
 
         function clockOutCrew(crew) {
-            $scope.timeEntries.forEach( entry => {
+            $scope.timeEntries.forEach(entry => {
                 if (entry.employee.crew == crew.name) {
                     entry.timeOut = getCurrentDateAndTime();
                     $scope.timeEntries.$save(entry);
@@ -88,7 +83,7 @@
         }
 
         function clockOutEmployee(employee) {
-            $scope.timeEntries.forEach( entry => {
+            $scope.timeEntries.forEach(entry => {
                 if (entry.employee.id == employee.$id) {
                     entry.timeOut = getCurrentDateAndTime();
                     $scope.timeEntries.$save(entry);
@@ -112,19 +107,29 @@
             }).then((modal) => {
                 modal.element.modal();
                 modal.close.then((timeCard) => {
-                    $scope.timeEntries.forEach(entry => {
-                        if (!entry.hasOwnProperty('timeCardId')) entry.timeCardId = timeCard.$id;
-                    });
-                    $scope.timeCards.$add(timeCard);
+                    addTimeCard(timeCard);
                 });
+            })
+        };
+
+        function addTimeCard(timeCard) {
+            $scope.timeCards.$add(timeCard).then(function (ref) {
+                for (var i = 0; i < $scope.timeEntries.length; i++) {
+                    if (!$scope.timeEntries[i].hasOwnProperty('timeCardId')) {
+                        $scope.timeEntries[i].timeCardId = ref.key;
+                        $scope.timeEntries.$save($scope.timeEntries[i]);
+                    }
+                }
             });
         }
 
+
         //-- Helper Functions --//
+
         function getCurrentDateAndTime() {
             var today = new Date();
             var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
+            var mm = today.getMonth() + 1;
             var yyyy = today.getFullYear();
             var hours = today.getHours();
             var min = today.getMinutes();
@@ -137,9 +142,7 @@
                 mm = '0' + mm;
             }
 
-            today = mm + '/' + dd + '/' + yyyy + ' ' + hours + ':' + min + ':' + sec;
-            return today;
+            return mm + '/' + dd + '/' + yyyy + ' ' + hours + ':' + min + ':' + sec;
         }
-
     }
 })();

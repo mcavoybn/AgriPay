@@ -53,7 +53,6 @@
         }
 
         function clockInCrew(crew) {
-            console.log("you clicked clock in crew")
             $scope.employees.forEach(employee => {
                 if (employee.crew == crew.name) {
                     console.log(employee);

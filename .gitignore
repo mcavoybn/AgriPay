@@ -1,10 +1,10 @@
 public/node_modules
 functions
-testing
+functions/node_modules
+
 firebase-debug.log
 .firebasesrc
 database.rules.json
 firebase.json
 npm-debug.log
 README.md
-functions/node_modules

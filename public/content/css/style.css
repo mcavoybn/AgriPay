@@ -61,7 +61,13 @@ nav a {
     background-color:#ddd;
 }
 
-/*--- Timekeeping --*/
+
+/*--- Crew Detail ---*/
+.delete {
+    color:red;
+}
+
+    /*--- Timekeeping --*/
 #barcodeScanner{
     border: 10px solid red;
 }

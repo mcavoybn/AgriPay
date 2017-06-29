@@ -14,14 +14,13 @@
         <div class="row">
             <button class="btn btn-primary" ng-click="editCrew()">Edit</button>
             <button class="btn btn-primary" ng-click="addEmployeeToCrew()">Add Employees</button>
+            
             <button class="btn btn-danger" ng-click="deleteCrew()" ng-confirm="Are you sure you want to delete this crew?">Delete Crew</button>
         </div>
         <div class="row">
-            <!--
-<ul>
-<li ng-repeat="employee in employees | orderBy: 'name'">{{employee}}</li>
-</ul>
--->
+            <ul>
+                <li ng-repeat="employee in employees | orderBy: 'name'">{{employee.firstName}}</li>
+            </ul>
         </div>
     </div>
 
@@ -37,6 +36,13 @@
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="crew.manager" placeholder="Crew Manager"> 
             </div>
+        </div>
+        <div class="row">
+            <ul>
+                <li ng-repeat="employee in employees | orderBy: 'name'">{{employee.firstName}}
+                    <span class="glyphicon glyphicon-remove-circle delete" ng-click="removeEmployeeFromCrew(employee)"></span>
+                </li>
+            </ul>
         </div>
         <button class="btn btn-success" ng-click="saveCrew()">Save</button>
     </div>

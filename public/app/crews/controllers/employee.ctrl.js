@@ -19,11 +19,16 @@
         $scope.goBack = goBack;        
         $scope.saveEmployee = saveEmployee;
         
+        var crewsRef;
+        var employeeRef;
+        
 
         activate();
 
-        function activate() {
-            var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId);
+        function activate(){
+            employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
+            crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            $scope.crews = $firebaseArray(crewsRef);
             $scope.employee = $firebaseObject(employeeRef);
 
             var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
@@ -53,6 +58,9 @@
         function saveEmployee() {
             $scope.isEditing = false;
             $scope.employee.$save();
+            employeeRef.update({
+                "crewID": 'CREWIDGOESHERE'
+            });
         }
     }
 })();

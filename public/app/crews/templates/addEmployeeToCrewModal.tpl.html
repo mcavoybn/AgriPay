@@ -1,0 +1,26 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h3>Add Employee To Crew</h3>
+            </div>
+            
+            <div class="modal-body">
+                <form>
+                    <div class="checkbox" ng-repeat="employee in vm.employeeList | orderBy: 'firstName'">
+                        <label>
+                            <input type="checkbox" name="employeeList" value={{employee.$id}}/>{{employee.firstName}} {{employee.lastName}}
+                        </label>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="vm.saveResults()" data-dismiss="modal">Save</button>
+                <button class="btn btn-danger" ng-click="vm.cancel()" data-dismiss="modal">Cancel</button>
+            </div>
+            
+        </div>
+    </div>
+</div>

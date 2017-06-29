@@ -1,26 +1,30 @@
 <div class="container-fluid">
-    <!-- View -->
+
+    <!-- SEARCH AND CREATE -->
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
-            <div class="input-group">
+            <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search..." ng-model="searchText">
             </div>
             <button class="btn btn-success" ng-click="createCrew()">Create New Crew</button>
         </div>
     </div>
+    <!-- /SEARCH AND CREATE -->
+
+    <!-- CREW LIST -->
     <div class="row">
-        <ul>
-            <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
-                <a ui-sref="crew({id: crew.$id})"><img ng-src="{{crew.photo}}" height="50px" />
-                {{crew.name}}
-                <ul>
-                    <li>
-                        {{crew.count}} Employees in Crew
-                    </li>
-                </ul>
-                </a>
-            </li>
-        </ul>
+        <div class="col-xs-6 col-xs-offset-3">
+            <ul class="list-unstyled">
+                <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
+                    <a ui-sref="crew({id: crew.$id})">
+                        <img ng-src="{{crew.photo}}" height="50px" />
+                        {{crew.name}}
+                    </a><br />                
+                    {{crew.count}} Employees in Crew             
+                </li>
+            </ul>
+        </div>
     </div>
+    <!-- /CREW LIST -->
 
 </div>

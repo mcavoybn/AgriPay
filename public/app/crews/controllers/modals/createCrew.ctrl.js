@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('CreateCrewModalCtrl', CreateCrewModalCtrl);
+        .controller('CreateCrewCtrl', CreateCrewCtrl);
 
-    CreateCrewModalCtrl.$inject = ['$scope', 'close'];
+    CreateCrewCtrl.$inject = ['close'];
 
-    function CreateCrewModalCtrl($scope, close) {
+    function CreateCrewCtrl(close) {
         var vm = this;
         vm.crew = {};
         

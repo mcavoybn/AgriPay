@@ -9,76 +9,75 @@
     
     function CrewCtrl($scope, $state, $stateParams, $firebaseObject, $firebaseArray, $firebaseAuth, ModalService) {
         $scope.isEditingCrew = false;
-        $scope.editCrew = editCrew;
-        $scope.saveCrew = saveCrew;
-        $scope.deleteCrew = deleteCrew;
+
         $scope.addEmployeeToCrew = addEmployeeToCrew;
+        $scope.deleteCrew = deleteCrew;
+        $scope.editCrew = editCrew;
         $scope.removeEmployeeFromCrew = removeEmployeeFromCrew;
-        var employeeRef;
-        var crewRef;
+        $scope.saveCrew = saveCrew;
+
+        const crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
+        const employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');  
         
         activate();
+
+        //////////////////////
         
         function activate() {
-            crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
-            $scope.crew = $firebaseObject(crewRef);
-            employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
-            $scope.employees = $firebaseArray(employeeRef.orderByChild('crewID').equalTo($scope.crew.$id));
+            $scope.crew = $firebaseObject(crewRef);                      
             $scope.allEmployees = $firebaseArray(employeeRef);
+            $scope.employees = $firebaseArray(employeeRef.orderByChild('crewID').equalTo($scope.crew.$id));
         }
-        
-        function editCrew() {
-            $scope.isEditingCrew = true;
-            
+
+        function addEmployeesById(employeeKeys) {
+            employeeKeys.forEach( (key) => {
+                const employee = $firebaseObject(employeeRef.child(key));
+
+                employee.$bindTo($scope, 'employee').then((ref) => {                    
+                    $scope.employee.crewID = $scope.crew.$id;
+                    $scope.employee.crew = $scope.crew.name;
+                });
+
+                $scope.crew.count += 1;
+                $scope.crew.$save();
+            });
         }
         
         function addEmployeeToCrew() {
             ModalService.showModal({
-                templateUrl: 'app/crews/templates/addEmployeeToCrewModal.tpl.html',
-                controller: 'AddEmployeeToCrewModalCtrl',
+                templateUrl: 'app/crews/templates/modals/addEmployeeToCrew.tpl.html',
+                controller: 'AddEmployeeToCrewCtrl',
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-                modal.close.then((crewEmployeeIDList) => {
-                    for(var id in crewEmployeeIDList) {
-                        var empRef = employeeRef.child(crewEmployeeIDList[id]);
-                        var crewCountRef = crewRef.child('count');
-                        crewCountRef.transaction((currentCount) => {
-                            return currentCount + 1;
-                        });
-                        empRef.update({
-                            "crewID": $scope.crew.$id,
-                            "crew" : $scope.crew.name
-                        });
-                    }
+                modal.close.then((employeeKeys) => { 
+                    addEmployeesById(employeeKeys)
                 });
             });
         }
         
-        function saveCrew() {
-            $scope.crew.$save().then((data) => {
-                
-            }).catch((error) => {
-                console.log(error);
-            });
+        function deleteCrew() {
+            $scope.crew.$remove()
+            .then( data => $state.go('crews') )
+            .catch( console.log );
             
-           $scope.isEditingCrew = false;
         }
         
-        function deleteCrew() {
-            $scope.crew.$remove().then((data) => {
-                $state.go('crews');
-            }).catch((error) => {
-                console.log(error);
-            });
-            
-        }
+        function editCrew() {
+            $scope.isEditingCrew = true;
+        }        
         
         function removeEmployeeFromCrew(employee) {
-            employeeRef.child(employee.$id).update({
-                "crewID": null
-            });
+            employee.crewID = null;
+            $scope.employees.$save(employee);
+
             $scope.crew.count--;
+            $scope.crew.$save();
+        }
+
+        function saveCrew() {
+            $scope.crew.$save();            
+            $scope.isEditingCrew = false;
         }
     }
 })();

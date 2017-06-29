@@ -21,8 +21,8 @@
 
         function addEmployee() {
             ModalService.showModal({
-                templateUrl: 'app/crews/templates/addEmployee.tpl.html',
-                controller: 'AddEmployeeCtrl',
+                templateUrl: 'app/crews/templates/modals/createEmployee.tpl.html',
+                controller: 'CreateEmployeeCtrl',
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();

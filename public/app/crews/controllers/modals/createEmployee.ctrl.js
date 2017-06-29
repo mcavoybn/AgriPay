@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('AddEmployeeCtrl', AddEmployeeCtrl);
+        .controller('CreateEmployeeCtrl', CreateEmployeeCtrl);
 
-    AddEmployeeCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
+    CreateEmployeeCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
 
-    function AddEmployeeCtrl($scope, close, $firebaseAuth, $firebaseArray) {
+    function CreateEmployeeCtrl($scope, close, $firebaseAuth, $firebaseArray) {
         var vm = this;
         vm.employee = {};
 

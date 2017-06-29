@@ -17,13 +17,9 @@
             $firebaseAuth().$createUserWithEmailAndPassword($scope.email, $scope.password)
             .then((data) => {
                 $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password)
-                .then((data) => {
-                    $state.go('crews'); 
-                })
+                .then((data) => { $state.go('crews'); })
             })
-            .catch( (error) => {
-                $scope.message = error.message;        
-            });
+            .catch( (error) => { $scope.message = error.message; });
         }
     }
 })();

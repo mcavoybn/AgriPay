@@ -1,6 +1,6 @@
 public/node_modules
 functions
-
+testing
 firebase-debug.log
 .firebasesrc
 database.rules.json

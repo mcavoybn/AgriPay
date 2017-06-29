@@ -58,9 +58,6 @@
         function saveEmployee() {
             $scope.isEditing = false;
             $scope.employee.$save();
-            employeeRef.update({
-                "crewID": 'CREWIDGOESHERE'
-            });
         }
     }
 })();

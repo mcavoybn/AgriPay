@@ -3,8 +3,9 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>Employees</h1>
             <div id="employee-list">
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Search by Employee name" />
                 <ul>
-                    <li ng-repeat="employee in employees">
+                    <li ng-repeat="employee in employees | filter: searchText | orderBy: 'name' ">
                         <h4 ng-click="selectEmployee(employee)">{{employee.firstName + " " + employee.lastName}}</h4>
                         <p><em>Crew: {{employee.crew}}</em></p>
                         <button class="btn btn-remove" ng-click="removeEmployee(employee)">Remove</button>

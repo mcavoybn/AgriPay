@@ -1,28 +1,25 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('EmployeesCtrl', EmployeesCtrl);
 
-    EmployeesCtrl.$inject = ['$window', '$scope', '$state', '$firebaseArray', '$firebaseAuth', '$stateParams', 'ModalService'];
+    EmployeesCtrl.$inject = ['$window', '$scope', '$state', '$firebaseArray', '$firebaseAuth', 'ModalService'];
 
-    function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, $stateParams, ModalService) {
-        $scope.employees = [];
+    function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, ModalService) {
         $scope.addEmployee = addEmployee;
-        $scope.selectEmployee = selectEmployee;
         $scope.removeEmployee = removeEmployee;
+        $scope.selectEmployee = selectEmployee;
+
         activate();
 
-        function activate(){
-            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+        function activate() {
+            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             $scope.employees = $firebaseArray(employeesRef);
-            $scope.employees.$loaded().then((data) => {
-                $scope.employees = data;
-            });
         }
 
-        function addEmployee(){
+        function addEmployee() {
             ModalService.showModal({
                 templateUrl: 'app/crews/templates/addEmployee.tpl.html',
                 controller: 'AddEmployeeCtrl',
@@ -34,19 +31,14 @@
                 });
             });
         }
-        
-        function removeEmployee(employee){
-            $scope.employees.$remove(employee);
+
+        function removeEmployee(employee) {
+            if (confirm("Delete employee?")) $scope.employees.$remove(employee);
         }
 
-        function selectEmployee(employee){
-            console.log(employee.$id);
-            $state.go('employee', { employeeId: employee.$id} );
-        }
-        
-        function saveEmployees(){
-            $scope.employees.forEach((employee) => {                
-                $scope.employees.$save(employees); 
+        function selectEmployee(employee) {
+            $state.go('employee', {
+                employeeId: employee.$id
             });
         }
     }

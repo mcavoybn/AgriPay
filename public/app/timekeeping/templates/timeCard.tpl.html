@@ -1,0 +1,39 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="vm22.cancel()" data-dismiss="modal">&times;</button>
+                <h3>New TimeCard</h3>
+            </div>
+
+            <div class="modal-body">
+                <form ng-submit="submit()">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.periodStart" placeholder="Period Start" autofocus />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.periodEnd" placeholder="Period End" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.periodType" placeholder="Period Type" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.farmer" placeholder="Farmer" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.job" placeholder="Job" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.crop" placeholder="Crop" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.workDate" placeholder="Work Date" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.payDate" placeholder="Pay Date" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.overrideRate" placeholder="Override Hourly Rate" />
+                        <li><em>Crew:</em></li>
+                        <select ng-model="vm2.timeCard.crew">
+                            <option ng-repeat="crew in crews" ng-click="setTimeCardCrew(crew)">{{crew.name}}</option>
+                        </select> 
+                        <h4>Field Info:</h4>
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.field.id" placeholder="Field ID" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.field.description" placeholder="Field Description" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.field.acreage" placeholder="Field Acreage" />
+                        <input type="text" class="form-control" ng-model="vm2.timeCard.field.state" placeholder="Field State" />
+                    </div>
+                </form>
+            </div>
+            <!-- SUBMIT MUST GO IN MODAL FOOTER!!! -->
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="vm2.submit()" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

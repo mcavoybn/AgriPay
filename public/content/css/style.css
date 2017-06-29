@@ -9,6 +9,7 @@
 body{
     background-color:#fff;
     overflow-x: hidden;    
+    padding: 35px;
 }
 
 ol ul{
@@ -16,10 +17,16 @@ ol ul{
 }
 
 .well {
-    background-color: #FFF;
+    background-color: #ddd;
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
     border: none;
 }
+
+.glyphicon {
+    font-size:4em;
+}
+
+/*--- Employees ---*/
 
 /*--- Home ---*/
 
@@ -53,4 +60,9 @@ nav a {
 /*--- Crew Detail ---*/
 .delete {
     color:red;
+}
+
+    /*--- Timekeeping --*/
+#barcodeScanner{
+    border: 10px solid red;
 }

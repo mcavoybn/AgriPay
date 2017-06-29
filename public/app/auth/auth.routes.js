@@ -10,7 +10,7 @@
     function config($stateProvider) {
         $stateProvider
             .state('login', {
-            url: '/',
+            url: '/login',
             templateUrl:'app/auth/templates/login.tpl.html',
             controller: 'LoginCtrl'
         })

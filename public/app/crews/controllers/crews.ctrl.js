@@ -18,14 +18,12 @@
         
         function createCrew() {
             ModalService.showModal({
-                templateUrl: 'app/crews/templates/createCrewModal.tpl.html',
-                controller: 'CreateCrewModalCtrl',
+                templateUrl: 'app/crews/templates/modals/createCrew.tpl.html',
+                controller: 'CreateCrewCtrl',
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-                modal.close.then((crew) => {
-                    $scope.crews.$add(crew);
-                });
+                modal.close.then((crew) => { $scope.crews.$add(crew); });
             });
         }
     }

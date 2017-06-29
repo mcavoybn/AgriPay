@@ -3,11 +3,11 @@
     
     angular
         .module('app')
-        .controller('AddEmployeeToCrewModalCtrl', AddEmployeeToCrewModalCtrl);
+        .controller('AddEmployeeToCrewCtrl', AddEmployeeToCrewCtrl);
     
-    AddEmployeeToCrewModalCtrl.$inject = ['close', '$firebaseArray', '$firebaseAuth'];
+    AddEmployeeToCrewCtrl.$inject = ['close', '$firebaseArray', '$firebaseAuth'];
     
-    function AddEmployeeToCrewModalCtrl(close, $firebaseArray, $firebaseAuth) {
+    function AddEmployeeToCrewCtrl(close, $firebaseArray, $firebaseAuth) {
         var vm = this;
         vm.employeeList = [];
         vm.crewEmployees = [];

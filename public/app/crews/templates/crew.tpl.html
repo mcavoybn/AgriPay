@@ -1,32 +1,28 @@
-<div class="container-fluid text-center">
+<div class="container-fluid">
 
-    <!-- View -->
+    <!-- VIEW -->
     <div ng-hide="isEditingCrew">
-        <div class="row">
+        <div class="row text-center">
             <img ng-src="{{crew.photo}}" height="100px"/>
-        </div>
-        <div class="row">
-            {{crew.name}}
-        </div>
-        <div class="row">
-            {{crew.manager}}
-        </div>
-        <div class="row">
-            <button class="btn btn-primary" ng-click="editCrew()">Edit</button>
-            <button class="btn btn-primary" ng-click="addEmployeeToCrew()">Add Employees</button>
+            <h3>{{crew.name}}</h3>
+            <h3>{{crew.manager}}</h3>
             
-            <button class="btn btn-danger" ng-click="deleteCrew()" ng-confirm="Are you sure you want to delete this crew?">Delete Crew</button>
-        </div>
-        <div class="row">
-            <ul>
+            <div class="btn-group">                
+                <button class="btn btn-default" ng-click="editCrew()">Edit</button>
+                <button class="btn btn-default" ng-click="addEmployeeToCrew()">Add Employees</button>            
+                <button class="btn btn-danger" ng-click="deleteCrew()" ng-confirm="Are you sure you want to delete this crew?">Delete Crew</button>
+            </div>
+
+            <ul class="list-unstyled">
                 <li ng-repeat="employee in employees | orderBy: 'name'">{{employee.firstName}}</li>
             </ul>
         </div>
     </div>
+    <!-- /VIEW -->
 
-    <!-- Edit -->
+    <!-- EDIT -->
     <div class="row" ng-show="isEditingCrew">
-        <div class="col-md-12">
+        <div class="row text-center">
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="crew.photo" placeholder="Crew Image URL"> 
             </div>
@@ -36,15 +32,15 @@
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="crew.manager" placeholder="Crew Manager"> 
             </div>
-        </div>
-        <div class="row">
-            <ul>
+
+            <ul class="list-unstyled">
                 <li ng-repeat="employee in employees | orderBy: 'name'">{{employee.firstName}}
                     <span class="glyphicon glyphicon-remove-circle delete" ng-click="removeEmployeeFromCrew(employee)"></span>
                 </li>
             </ul>
+            <button class="btn btn-success" ng-click="saveCrew()">Save</button>
         </div>
-        <button class="btn btn-success" ng-click="saveCrew()">Save</button>
     </div>
+    <!-- /EDIT -->
 
 </div>

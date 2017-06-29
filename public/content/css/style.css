@@ -56,3 +56,8 @@ ol ul{
 nav a {
     cursor: pointer;
 }
+
+/*--- Timekeeping --*/
+#barcodeScanner{
+    border: 10px solid red;
+}

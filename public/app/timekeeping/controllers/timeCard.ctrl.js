@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -9,16 +9,17 @@
 
     function TimeCardCtrl($scope, close, $firebaseAuth, $firebaseArray) {
         var vm2 = this;
-        
+
         var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
         $scope.crews = $firebaseArray(crewsRef);
-        $scope.crews.$loaded().then((data) => {
-            $scope.crews = data;
-        });
 
-        vm2.submit = () => {close(vm2.timeCard, 500);};
-        vm2.cancel = () => {close({}, 500);};
-        
+        vm2.submit = () => {
+            close(vm2.timeCard, 500);
+        };
+        vm2.cancel = () => {
+            close({}, 500);
+        };
+
         $scope.setTimeCardCrew = crew => vm2.timeCard.crew = crew;
     }
 })();

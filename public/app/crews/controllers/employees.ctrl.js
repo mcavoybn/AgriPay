@@ -17,9 +17,6 @@
         function activate() {
             var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             $scope.employees = $firebaseArray(employeesRef);
-            $scope.employees.$loaded().then((data) => {
-                $scope.employees = data;
-            });
         }
 
         function addEmployee() {

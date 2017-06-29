@@ -12,6 +12,8 @@
         $scope.clockOutCrew = clockOutCrew;
         $scope.clockInEmployee = clockInEmployee;
         $scope.clockOutEmployee = clockOutEmployee;
+        
+        $scope.searchText;
 
         $scope.showCrewsTab = showCrewsTab;
         $scope.showEmployeesTab = showEmployeesTab;
@@ -24,33 +26,53 @@
         function activate() {
             var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
-            $scope.crews.$loaded().then((data) => {
-                $scope.crews = data;
-            });
 
             var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             $scope.employees = $firebaseArray(employeesRef);
-            $scope.employees.$loaded().then((data) => {
-                $scope.employees = data;
-            });
 
             var timeEntriesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeEntries');
             $scope.timeEntries = $firebaseArray(timeEntriesRef);
-            $scope.timeEntries.$loaded().then((data) => {
-                $scope.timeEntries = data;
-            });
 
             var timeCardsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeCards');
             $scope.timeCards = $firebaseArray(timeCardsRef);
-            $scope.timeCards.$loaded().then((data) => {
-                $scope.timeCards = data;
-            });
+            
+            Quagga.init({
+                inputStream : {
+                    name : "Barcode Scanner",
+                    type : "LiveStream",
+                    target: document.querySelector('#barcodeScanner')    // Or '#yourElement' (optional)
+                },
+                decoder : {
+                    readers : ["code_128_reader"]
+                }
+            }, function(err) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();           
+
+//                Quagga.onProcessed( data => {
+//                    $('#barcodeScanner').css('border', '10px solid green');
+//                    console.log(data.codeResult);
+//                });
+                Quagga.onDetected( data => {
+                    window.setTimeout($('#barcodeScanner').css('border', '10px solid green'), 3000);
+                    console.log(data.codeResult.code);
+                    $scope.employees.forEach( employee => {
+                        if(employee.$id == data.codeResult.code) $scope.searchText = employee.lastName;
+                    })
+                });
+                Quagga.offDetected( data => {
+                    $('#barcodeScanner').css('border', '10px solid red');
+                })
+            });            
         }
 
         function clockInCrew(crew) {
             $scope.employees.forEach(employee => {
                 if (employee.crew == crew.name) {
-                    console.log(employee);
                     clockInEmployee(employee);
                 }
             });

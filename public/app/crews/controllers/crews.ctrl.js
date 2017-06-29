@@ -12,8 +12,11 @@
         activate();
 
         function activate() {
-            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
+            
+            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
+            $scope.employees = $firebaseArray(employeesRef);
         }
         
         function createCrew() {
@@ -23,7 +26,13 @@
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-                modal.close.then((crew) => { $scope.crews.$add(crew); });
+                modal.close.then((crew) => { 
+                    if(!crew.hasOwnProperty('photo')){
+                        crew.photo="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-group-512.png";
+                    }
+                    crew.count = 0;
+                    $scope.crews.$add(crew);
+                });
             });
         }
     }

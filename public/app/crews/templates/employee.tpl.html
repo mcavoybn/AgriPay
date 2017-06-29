@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 well">
             <h1>Employees</h1>
-            <button class="btn btn-success" ng-click="goBack()">Back</button>
+            <button class="btn btn-primary" ng-click="goBack()">Back</button>
             <div id="employee-list" ng-hide="isEditing">
                 <h3>{{employee.firstName + " " + employee.middle + " " + employee.lastName}}</h3>
                 <ul>
@@ -20,7 +20,7 @@
                     <li><em>SSN: </em>{{employee.ssn}}</li>
                     <li><em>Gender: </em>{{employee.gender}}</li>
                 </ul>
-                <button class="btn btn-edit" ng-click="editEmployee()">Edit</button>
+                <button class="btn btn-danger" ng-click="editEmployee()">Edit</button>
             </div>
             <div id="employee-list" ng-show="isEditing">
                 <h1>Edit Employee Info</h1>
@@ -64,7 +64,7 @@
                         <option value="1099">1099</option>
                         <option value="H2A">H2A</option>
                     </select>
-                    <button class="btn btn-save" ng-click="saveEmployee()">Save</button>
+                    <button class="btn btn-success" ng-click="saveEmployee()">Save</button>
                 </ul>
             </div>
         </div>

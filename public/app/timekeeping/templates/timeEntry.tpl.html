@@ -1,37 +1,63 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 well">
-            <h1>Time Tracking</h1>
-            <div class="row">
-                <button class="btn" ng-click="showCrewsTab()">Crews</button>
-                <button class="btn" ng-click="showEmployeesTab()">Employees</button>
-            </div>
+        <h3 class="text-center">Time Tracking</h3>
 
-            <div class="row" ng-show="isShowingCrews">
+        <!-- BARCODE SCANNER -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 well text-center">
+                <button class="btn btn-primary" ng-click="startBarcodeScanner()" ng-hide="showingScanner">Show Barcode Scanner</button>
+                <button class="btn btn-warning" ng-click="stopBarcodeScanner()" ng-show="showingScanner">Hide Barcode Scanner</button>
+                <div ng-show="showingScanner" class="col-md-6 col-md-offset-3 text-center">
+                    <div id="barcodeScanner"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 well text-center">
+                <button class="btn btn-info" ng-click="showCrewsTab()" ng-hide="isShowingCrews">Crews</button>
+                <button class="btn btn-primary" ng-click="showCrewsTab()" ng-show="isShowingCrews">Crews</button>
+
+                <button class="btn btn-primary" ng-click="showEmployeesTab()" ng-hide="isShowingCrews">Employees</button>
+                <button class="btn btn-info" ng-click="showEmployeesTab()" ng-show="isShowingCrews">Employees</button>
+            </div>
+        </div>
+        <!-- /BARCODE SCANNER -->
+
+        <!-- CREW OR EMPLOYEE LIST-->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 well">
+                <div ng-show="isShowingCrews">
                     <ul>
                         <li ng-repeat="crew in crews">
                             <h4>{{crew.name}}</h4>
-                            <button class="btn" ng-click="clockInCrew(crew)">Clock In</button>
-                            <button class="btn" ng-click="clockOutCrew(crew)">Clock Out</button>
+                            <button class="btn btn-primary" ng-click="clockInCrew(crew)" ng-hide="isCrewClockedIn(crew)">Clock In</button>
+                            <button class="btn btn-warning" ng-click="clockOutCrew(crew)" ng-show="isCrewClockedIn(crew)">Clock Out</button>
                         </li>
                     </ul>
-            </div>
-            <div class="row" ng-hide="isShowingCrews">
+                </div>
+                <div ng-hide="isShowingCrews">
                     <input type="text" class="form-control" ng-model="searchText" placeholder="Search by employee name..">
                     <ul>
                         <li ng-repeat="employee in employees | filter: searchText | orderBy: 'firstName'">
                             <h4>{{employee.firstName + " " + employee.lastName }}</h4>
-                            <button class="btn" ng-click="clockInEmployee(employee)">Clock In</button>
-                            <button class="btn" ng-click="clockOutEmployee(employee)">Clock Out</button>
-                        </li>                        
+                            <button class="btn btn-primary" ng-click="clockInEmployee(employee)" ng-hide="isEmployeeClockedIn(employee)">Clock In</button>
+                            <button class="btn btn-warning" ng-click="clockOutEmployee(employee)" ng-show="isEmployeeClockedIn(employee)">Clock Out</button>
+                        </li>
                     </ul>
-                <div id="barcodeScanner" ng-show="showingScanner"></div>
-                <button class="btn btn-success" ng-click="startBarcodeScanner()" ng-hide="showingScanner">Show Barcode Scanner</button>
-                <button class="btn btn-cancel" ng-click="stopBarcodeScanner()" ng-show="showingScanner">Hide Barcode Scanner</button>
-            </div>
-            <div class="row">
-                <button class="btn" ng-click="showTimeCardModal()">New Timecard</button>
+                </div>
             </div>
         </div>
+        <!-- CREW OR EMPLOYEE LIST-->
+
+        <!-- TIMECARD BUTTON -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 well text-center">
+                <div class="row">
+                    <button class="btn btn-primary" ng-click="showTimeCardModal()">New Timecard</button>
+                </div>
+            </div>
+        </div>
+        <!-- /TIMECARD BUTTON -->
+
     </div>
 </div>

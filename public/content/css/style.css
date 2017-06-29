@@ -13,6 +13,11 @@ body{
     padding-bottom: 75px;
 }
 
+a{text-decoration:none; color:#262626}
+a:link{text-decoration:none; color:#262626;} 
+a:visited{text-decoration:none; color:#262626;} 
+a:hover{text-decoration:none; color:#449D44;}
+
 ol ul{
     list-style:none;
 }
@@ -71,4 +76,6 @@ nav a {
 /*--- Timekeeping --*/
 #barcodeScanner{
     border: 10px solid red;
+    max-width: 220px;
+    max-height: 170px;
 }

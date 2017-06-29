@@ -8,7 +8,7 @@
     AddEmployeeToCrewCtrl.$inject = ['close', '$firebaseArray', '$firebaseAuth'];
     
     function AddEmployeeToCrewCtrl(close, $firebaseArray, $firebaseAuth) {
-        var vm = this;
+        let vm = this;
         vm.employeeList = [];
         vm.crewEmployees = [];
         
@@ -18,7 +18,7 @@
         activate();
         
         function activate() {
-            var employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
+            let employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             vm.employeeList = $firebaseArray(employeeRef);
         }
         

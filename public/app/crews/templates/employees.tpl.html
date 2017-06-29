@@ -1,17 +1,29 @@
 <div class="container">
     <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 class="text-center">Employees</h3>
+        </div>
         <div class="col-md-6 col-md-offset-3 well">
-            <h1>Employees</h1>
-            <div id="employee-list">
+            <div class="form-group">
                 <input type="text" class="form-control" ng-model="searchText" placeholder="Search by Employee name" />
-                <ul>
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3 well">
+            <div id="employee-list">
+                <ul class="list-unstyled">
                     <li ng-repeat="employee in employees | filter: searchText | orderBy: 'name' ">
-                        <h4 ng-click="selectEmployee(employee)">{{employee.firstName + " " + employee.lastName}}</h4>
-                        <p><em>Crew: {{employee.crew}}</em></p>
-                        <button class="btn btn-remove" ng-click="removeEmployee(employee)">Remove</button>
+                        <a ng-click="selectEmployee(employee)">
+                            <div class="col-md-9">
+                                <h4>{{employee.firstName + " " + employee.lastName}}</h4>
+                                <p><em>Crew: {{employee.crew}}</em></p>
+                            </div>
+                        </a>
+                        <div class="col-md-3">
+                            <span style="color:red" class="glyphicon glyphicon-remove" ng-click="removeEmployee(employee)"></span>
+                        </div>
                     </li>
                 </ul>
-                <button class="btn btn-success" ng-click="addEmployee()">Add</button>
+                <button class="btn btn-primary" ng-click="addEmployee()">Create New Employee</button>
             </div>
         </div>
     </div>

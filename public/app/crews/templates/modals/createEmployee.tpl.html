@@ -22,8 +22,8 @@
                         </select>
                         Crew:
                         <select ng-model="vm.employee.crew">
-                            <option ng-click="assignCrew('No Crew')">No Crew</option>
-                            <option ng-repeat="crew in crews" ng-click="assignCrew(crew)">{{crew.name}}</option>
+                            <option>No Crew</option>
+                            <option ng-repeat="crew in crews">{{crew.name}}</option>
                         </select>
                         <input type="text" class="form-control" ng-model="vm.employee.firstName" placeholder="First Name" autofocus />
                         <input type="text" class="form-control" ng-model="vm.employee.lastName" placeholder="Last Name" />
@@ -32,6 +32,7 @@
 <!--                        Change this to type=date eventualy-->
                         <input type="text" class="form-control" ng-model="vm.employee.dateOfBirth" placeholder="Date of Birth" />
                         <input type="text" class="form-control" ng-model="vm.employee.employeeId" placeholder="Employee ID"/>
+                        <button class="btn btn-default" ng-click="generateId()">Generate ID</button>
                         <input type="text" class="form-control" ng-model="vm.employee.address1" placeholder="Address 1" />
                         <input type="text" class="form-control" ng-model="vm.employee.address2" placeholder="Address 2" />
                         <input type="text" class="form-control" ng-model="vm.employee.city" placeholder="City" />

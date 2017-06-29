@@ -8,16 +8,15 @@
     CreateEmployeeCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
 
     function CreateEmployeeCtrl($scope, close, $firebaseAuth, $firebaseArray) {
-        var vm = this;
+        let vm = this;
         vm.employee = {};
 
         vm.submit = () => {close(vm.employee, 500);};
         vm.cancel = () => {close({}, 500);};
-
-        var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+        
+        $scope.generateId = () => vm.employee.employeeId = '_' + Math.random().toString(36).substr(2,9);
+        
+        let crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
         $scope.crews = $firebaseArray(crewsRef);
-        $scope.crews.$loaded().then((data) => {
-           $scope.crews = data; 
-        });
     }
 })();

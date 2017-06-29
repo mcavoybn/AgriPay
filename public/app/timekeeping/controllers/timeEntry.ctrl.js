@@ -12,7 +12,10 @@
         $scope.clockOutCrew = clockOutCrew;
         $scope.clockInEmployee = clockInEmployee;
         $scope.clockOutEmployee = clockOutEmployee;
-        
+
+        $scope.isCrewClockedIn = isCrewClockedIn;
+        $scope.isEmployeeClockedIn = isEmployeeClockedIn;
+
         $scope.searchText = "";
 
         $scope.showCrewsTab = showCrewsTab;
@@ -20,70 +23,36 @@
         $scope.isShowingCrews = true;
 
         $scope.showTimeCardModal = showTimeCardModal;
-        
-        $scope.showingScanner = false;        
+
+        $scope.showingScanner = false;
         $scope.startBarcodeScanner = startBarcodeScanner;
         $scope.stopBarcodeScanner = stopBarcodeScanner;
 
         activate();
 
         function activate() {
-            var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
 
-            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
+            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             $scope.employees = $firebaseArray(employeesRef);
 
-            var timeEntriesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeEntries');
+            const timeEntriesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeEntries');
             $scope.timeEntries = $firebaseArray(timeEntriesRef);
 
-            var timeCardsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeCards');
-            $scope.timeCards = $firebaseArray(timeCardsRef);           
+            const timeCardsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeCards');
+            $scope.timeCards = $firebaseArray(timeCardsRef);
         }
-        
-        
-        function startBarcodeScanner(){
-            $scope.showingScanner = true;
-            Quagga.init({
-                inputStream : {
-                    name : "Barcode Scanner",
-                    type : "LiveStream",
-                    target: document.querySelector('#barcodeScanner')    // Or '#yourElement' (optional)
-                },
-                decoder : {
-                    readers : ["code_128_reader"]
-                }
-            }, function(err) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                console.log("Initialization finished. Ready to start");
-                Quagga.start();           
 
-                Quagga.onProcessed( data => {
-                    $('#barcodeScanner').css('border', '10px solid red');
-                });
-                
-                Quagga.onDetected( data => {
-                    $('#barcodeScanner').css('border', '10px solid green');
-                    $scope.employees.forEach( employee => {
-                        if(employee.firstName == data.codeResult.code){
-                            console.log('Found Match!');
-                            $scope.searchText = data.codeResult.code;
-                        } 
-                    });
-                });
-                
-                Quagga.offDetected( data => {
-                    $('#barcodeScanner').css('border', '10px solid red');
-                })
-            }); 
-        }
-        
-        function stopBarcodeScanner(){
-            $scope.showingScanner = false;
-            Quagga.stop();
+        function addTimeCard(timeCard) {
+            $scope.timeCards.$add(timeCard).then(function (ref) {
+                for (let i = 0; i < $scope.timeEntries.length; i++) {
+                    if (!$scope.timeEntries[i].hasOwnProperty('timeCardId')) {
+                        $scope.timeEntries[i].timeCardId = ref.key;
+                        $scope.timeEntries.$save($scope.timeEntries[i]);
+                    }
+                }
+            });
         }
 
         function clockInCrew(crew) {
@@ -92,7 +61,6 @@
                     clockInEmployee(employee);
                 }
             });
-
         }
 
         function clockOutCrew(crew) {
@@ -105,7 +73,7 @@
         }
 
         function clockInEmployee(employee) {
-            var newTimeEntry = {
+            let newTimeEntry = {
                 timeIn: getCurrentDateAndTime(),
                 timeOut: null,
                 timeCardId: null,
@@ -129,6 +97,32 @@
             });
         }
 
+        function isCrewClockedIn(crew) {
+            let count = crew.count;
+            $scope.timeEntries.forEach(entry => {
+                if (entry.employee.crew == crew.name &&
+                    entry.hasOwnProperty('timeIn') &&
+                    !entry.hasOwnProperty('timeOut')) {
+                    count--;
+                    console.log("Employee " + entry.employee.lastName + " " + entry.employee.firstName + "is clocked in");
+                }
+            });
+            return count == 0;
+        }
+
+        function isEmployeeClockedIn(employee) {
+            let result = false;
+            $scope.timeEntries.forEach(entry => {
+                if (entry.employee.id == employee.$id &&
+                    entry.hasOwnProperty('timeIn') &&
+                    !entry.hasOwnProperty('timeOut')) {
+                    console.log("Employee " + employee.lastName + " " + employee.firstName + "is clocked in");
+                    result = true;
+                }
+            });
+            return result;
+        }
+
         function showCrewsTab() {
             $scope.isShowingCrews = true;
         }
@@ -150,28 +144,52 @@
             })
         };
 
-        function addTimeCard(timeCard) {
-            $scope.timeCards.$add(timeCard).then(function (ref) {
-                for (var i = 0; i < $scope.timeEntries.length; i++) {
-                    if (!$scope.timeEntries[i].hasOwnProperty('timeCardId')) {
-                        $scope.timeEntries[i].timeCardId = ref.key;
-                        $scope.timeEntries.$save($scope.timeEntries[i]);
-                    }
+        function startBarcodeScanner() {
+            $scope.showingScanner = true;
+            Quagga.init({
+                inputStream: {
+                    name: "Barcode Scanner",
+                    type: "LiveStream",
+                    target: document.querySelector('#barcodeScanner')
+                },
+                decoder: {
+                    readers: ["code_128_reader"]
                 }
-            });
+            }, function (err) {
+                if (err) { console.log(err); return; }                
+                Quagga.start();
+                Quagga.onDetected(data => {
+                    $('#barcodeScanner').css('border', '10px solid green');
+                    console.log("Scan result=" + data.codeResult.code);
+                    $scope.employees.forEach(employee => {
+                        if (employee.employeeId == data.codeResult.code) {
+                            console.log('Found Match!');
+                            $scope.searchText = employee.lastName;
+                        }
+                    });
+                });
+                Quagga.onProcessed(data => {
+                    $('#barcodeScanner').css('border', '10px solid red');
+                    console.log("Scanning for barcode")
+                });
+            });          
         }
 
+        function stopBarcodeScanner() {
+            $scope.showingScanner = false;
+            Quagga.stop();
+        }
 
         //-- Helper Functions --//
 
         function getCurrentDateAndTime() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            var hours = today.getHours();
-            var min = today.getMinutes();
-            var sec = today.getSeconds();
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1;
+            let yyyy = today.getFullYear();
+            let hours = today.getHours();
+            let min = today.getMinutes();
+            let sec = today.getSeconds();
 
             if (dd < 10) {
                 dd = '0' + dd;

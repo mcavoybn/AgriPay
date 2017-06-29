@@ -23,9 +23,11 @@
                             <h4>{{employee.firstName + " " + employee.lastName }}</h4>
                             <button class="btn" ng-click="clockInEmployee(employee)">Clock In</button>
                             <button class="btn" ng-click="clockOutEmployee(employee)">Clock Out</button>
-                        </li>
-                        <div id="barcodeScanner"></div>
+                        </li>                        
                     </ul>
+                <div id="barcodeScanner" ng-show="showingScanner"></div>
+                <button class="btn btn-success" ng-click="startBarcodeScanner()" ng-hide="showingScanner">Show Barcode Scanner</button>
+                <button class="btn btn-cancel" ng-click="stopBarcodeScanner()" ng-show="showingScanner">Hide Barcode Scanner</button>
             </div>
             <div class="row">
                 <button class="btn" ng-click="showTimeCardModal()">New Timecard</button>

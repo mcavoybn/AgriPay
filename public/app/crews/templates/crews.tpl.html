@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search..." ng-model="searchText">
+                <input type="text" class="form-control" placeholder="Search..." ng-model="searchText.name">
             </div>
             <button class="btn btn-success" ng-click="createCrew()">Create New Crew</button>
         </div>
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
             <ul class="list-unstyled">
-                <li ng-repeat="crew in crews | filter: searchText | orderBy: 'name'">
+                <li ng-repeat="crew in crews | filter: searchText:strict | orderBy: 'name'">
                     <a ui-sref="crew({id: crew.$id})">
                         <img ng-src="{{crew.photo}}" height="50px" />
                         {{crew.name}}

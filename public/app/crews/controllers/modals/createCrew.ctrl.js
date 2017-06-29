@@ -8,7 +8,7 @@
     CreateCrewCtrl.$inject = ['close'];
 
     function CreateCrewCtrl(close) {
-        var vm = this;
+        let vm = this;
         vm.crew = {};
         
         vm.submit = () => {close(vm.crew, 500);};

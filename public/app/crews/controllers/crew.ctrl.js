@@ -14,24 +14,24 @@
         $scope.deleteCrew = deleteCrew;
         $scope.editCrew = editCrew;
         $scope.removeEmployeeFromCrew = removeEmployeeFromCrew;
-        $scope.saveCrew = saveCrew;
-
-        const crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
-        const employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');  
+        $scope.saveCrew = saveCrew;    
         
         activate();
 
         //////////////////////
-        
+        var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
         function activate() {
-            $scope.crew = $firebaseObject(crewRef);                      
-            $scope.allEmployees = $firebaseArray(employeeRef);
-            $scope.employees = $firebaseArray(employeeRef.orderByChild('crewID').equalTo($scope.crew.$id));
+            const crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
+            $scope.crew = $firebaseObject(crewRef); 
+            
+            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+            $scope.allEmployees = $firebaseArray(employeesRef);
+            $scope.crewEmployees = $firebaseArray(employeesRef.orderByChild('crewID').equalTo($scope.crew.$id));
         }
 
         function addEmployeesById(employeeKeys) {
             employeeKeys.forEach( (key) => {
-                const employee = $firebaseObject(employeeRef.child(key));
+                const employee = $firebaseObject(employeesRef.child(key));
 
                 employee.$bindTo($scope, 'employee').then((ref) => {                    
                     $scope.employee.crewID = $scope.crew.$id;
@@ -69,7 +69,7 @@
         
         function removeEmployeeFromCrew(employee) {
             employee.crewID = null;
-            $scope.employees.$save(employee);
+            $scope.crewEmployees.$save(employee);
 
             $scope.crew.count--;
             $scope.crew.$save();

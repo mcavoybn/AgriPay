@@ -8,9 +8,9 @@
     TimeCardCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
 
     function TimeCardCtrl($scope, close, $firebaseAuth, $firebaseArray) {
-        var vm2 = this;
+        let vm2 = this;
 
-        var crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+        let crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
         $scope.crews = $firebaseArray(crewsRef);
 
         vm2.submit = () => {

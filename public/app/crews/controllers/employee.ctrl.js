@@ -34,11 +34,9 @@
         function saveEmployee(){
             $scope.isEditing = false;
             $scope.employee.$save();
-//            var crewsSwitchRef = crewsRef.child('name').equalTo($scope.employee.crew);
-//            console.log(crewsSwitchRef);
-//            employeeRef.update({
-//                "crewID": crewsSwitchRef.$id
-//            });
+            employeeRef.update({
+                "crewID": 'CREWIDGOESHERE'
+            });
         }
         
         function goBack(){

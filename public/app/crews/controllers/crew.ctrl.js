@@ -47,7 +47,8 @@
                             return currentCount + 1;
                         });
                         empRef.update({
-                            "crewID": $scope.crew.$id
+                            "crewID": $scope.crew.$id,
+                            "crew" : $scope.crew.name
                         });
                     }
                 });

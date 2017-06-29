@@ -57,6 +57,10 @@ nav a {
     cursor: pointer;
 }
 
+#navbar {
+    background-color:#ddd;
+}
+
 /*--- Timekeeping --*/
 #barcodeScanner{
     border: 10px solid red;

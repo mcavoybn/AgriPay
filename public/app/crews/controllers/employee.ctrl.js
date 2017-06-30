@@ -5,21 +5,23 @@
         .module('app')
         .controller('EmployeeCtrl', EmployeeCtrl);
 
-    EmployeeCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseObject', '$firebaseAuth', '$stateParams', 'ModalService'];
+    EmployeeCtrl.$inject = ['$scope', '$state', '$stateParams', '$firebaseArray', '$firebaseAuth', '$firebaseObject'];
 
-    function EmployeeCtrl($scope, $state, $firebaseArray, $firebaseObject, $firebaseAuth, $stateParams, ModalService) {
-        $scope.assignCrew = assignCrew;
+    function EmployeeCtrl($scope, $state, $stateParams, $firebaseArray, $firebaseAuth, $firebaseObject) {
         
-        $scope.clickedShow = false;
-        $scope.clickShow = clickShow;
-        
+        $scope.clickedShow = false;        
         $scope.isEditing = false;
-        $scope.editEmployee = editEmployee;
+
+        $scope.assignCrew = crew => $scope.employee.crew = crew;
+        $scope.clickShow = () => $scope.clickedShow ? false : true; 
+        $scope.editEmployee = () => $scope.isEditing = true;
+        $scope.goBack = () => $state.go('employees');        
+        $scope.saveEmployee = () => { $scope.isEditing = false; $scope.employee.$save(); }
         
-        $scope.goBack = goBack;        
-        $scope.saveEmployee = saveEmployee;
         
         activate();
+
+        /////////////////////
 
         function activate(){
             const employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
@@ -27,31 +29,6 @@
             
             const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
-        }
-
-        function assignCrew(crew) {
-            $scope.employee.crew = crew;
-        }
-
-        function clickShow() {
-            if ($scope.clickedShow == false) {
-                $scope.clickedShow = true;
-            } else {
-                $scope.clickedShow = false;
-            }
-        }
-
-        function editEmployee() {
-            $scope.isEditing = true;
-        }
-
-        function goBack() {
-            $state.go('employees');
-        }
-
-        function saveEmployee() {
-            $scope.isEditing = false;
-            $scope.employee.$save();
         }
     }
 })();

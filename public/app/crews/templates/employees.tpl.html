@@ -1,17 +1,27 @@
 <div class="container">
+    
+    <!-- TITLE -->
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h3 class="text-center">Employees</h3>
-        </div>
+        <h3 class="text-center">Employees</h3>
+    </div>
+    <!-- /TITLE -->
+
+    <!-- SEARCH -->
+    <div class="row">
         <div class="col-md-6 col-md-offset-3 well">
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="searchText" placeholder="Search by Employee name" />
+                <input type="text" class="form-control" ng-model="searchText.name" placeholder="Search by Employee name" />
             </div>
         </div>
+    </div>
+    <!-- /SEARCH -->
+
+    <!-- EMPLOYEE LIST -->    
+    <div class="row">
         <div class="col-md-6 col-md-offset-3 well">
             <div id="employee-list">
                 <ul class="list-unstyled">
-                    <li ng-repeat="employee in employees | filter: searchText | orderBy: 'name' ">
+                    <li ng-repeat="employee in employees | filter: searchText:strict | orderBy: 'name' ">
                         <a ng-click="selectEmployee(employee)">
                             <div class="col-md-9">
                                 <h4>{{employee.firstName + " " + employee.lastName}}</h4>
@@ -23,8 +33,10 @@
                         </div>
                     </li>
                 </ul>
-                <button class="btn btn-primary" ng-click="addEmployee()">Create New Employee</button>
+                <button class="btn btn-primary" ng-click="createEmployee()">Create New Employee</button>
             </div>
         </div>
     </div>
+    <!-- /EMPLOYEE LIST -->  
+
 </div>

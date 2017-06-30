@@ -5,10 +5,10 @@
         .module('app')
         .controller('EmployeesCtrl', EmployeesCtrl);
 
-    EmployeesCtrl.$inject = ['$window', '$scope', '$state', '$firebaseArray', '$firebaseAuth', 'ModalService'];
+    EmployeesCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseAuth', 'ModalService'];
 
-    function EmployeesCtrl($window, $scope, $state, $firebaseArray, $firebaseAuth, ModalService) {
-        $scope.addEmployee = addEmployee;
+    function EmployeesCtrl($scope, $state, $firebaseArray, $firebaseAuth, ModalService) {
+        $scope.createEmployee = createEmployee;
         $scope.removeEmployee = removeEmployee;
         $scope.selectEmployee = selectEmployee;
 
@@ -22,7 +22,7 @@
             $scope.crews = $firebaseArray(crewsRef);
         }
 
-        function addEmployee() {
+        function createEmployee() {
             ModalService.showModal({
                 templateUrl: 'app/crews/templates/modals/createEmployee.tpl.html',
                 controller: 'CreateEmployeeCtrl',
@@ -31,7 +31,7 @@
                 modal.element.modal();
                 modal.close.then( employee => {
                     $scope.employees.$add(employee);   
-                    console.log("employee.crew= "+employee.crew)
+                    console.log("employee.crew: ", employee.crew)
                     incrementCrewCount(employee.crew);
                 });
             });
@@ -39,7 +39,7 @@
         
         function incrementCrewCount(crew){
             $scope.crews.forEach( checkCrew => {
-               if(crew.name == checkCrew.name){
+               if(crew.name == checkCrew.name) {
                    crew.count++;
                    crew.$save();
                } 
@@ -51,9 +51,7 @@
         }
 
         function selectEmployee(employee) {
-            $state.go('employee', {
-                employeeId: employee.$id
-            });
+            $state.go('employee', { employeeId: employee.$id });
         }
     }
 })();

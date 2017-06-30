@@ -29,19 +29,6 @@
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-<<<<<<< HEAD
-                modal.close.then(employee => {
-                    $scope.employees.$add(employee);
-                    $scope.crews.forEach(checkCrew => {
-                        if (checkCrew.$id == employee.crewID) {
-                            checkCrew.count++;
-                            checkCrew.$save();
-                        }
-                    });
-                });
-            });
-        }
-=======
                 modal.close.then( employee => {
                     $scope.employees.$add(employee);   
                     console.log("employee.crew: ", employee.crew)
@@ -58,7 +45,6 @@
                } 
             });
         }
->>>>>>> 632420683cb96c0d86df71ce83dba3e0cdb1cd04
 
         function removeEmployee(employee) {
             if (confirm("Delete employee?")) $scope.employees.$remove(employee);

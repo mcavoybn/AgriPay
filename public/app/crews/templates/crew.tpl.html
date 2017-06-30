@@ -3,7 +3,7 @@
     <!-- VIEW -->
     <div ng-hide="isEditingCrew">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 well">
+            <div class="col-sm-6 col-sm-offset-3 well">
                 <img ng-src="{{crew.photo}}" height="100px"/>
                 <h3>{{crew.name}}</h3>
                 <h3>{{crew.manager}}</h3>
@@ -25,7 +25,7 @@
     <!-- EDIT -->
     <div class="row" ng-show="isEditingCrew">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-sm-6 col-sm-offset-3">
                 <div class="form-group">
                     <input type="text" class="form-control" ng-model="crew.photo" placeholder="Crew Image URL"> 
                 </div>

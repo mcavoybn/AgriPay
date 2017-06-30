@@ -4,16 +4,16 @@
 
         <!-- BARCODE SCANNER -->
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 well text-center">
+            <div class="col-xs-6 col-xs-offset-3 well text-center">
                 <button class="btn btn-primary" ng-click="startBarcodeScanner()" ng-hide="showingScanner">Show Barcode Scanner</button>
                 <button class="btn btn-warning" ng-click="stopBarcodeScanner()" ng-show="showingScanner">Hide Barcode Scanner</button>
-                <div ng-show="showingScanner" class="col-md-6 col-md-offset-3 text-center">
+                <div ng-show="showingScanner" class="col-xs-6 col-xs-offset-3 text-center">
                     <div id="barcodeScanner"></div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 well text-center">
+            <div class="col-xs-6 col-xs-offset-3 well text-center">
                 <button class="btn btn-info" ng-click="showCrewsTab()" ng-hide="isShowingCrews">Crews</button>
                 <button class="btn btn-primary" ng-click="showCrewsTab()" ng-show="isShowingCrews">Crews</button>
 
@@ -25,7 +25,7 @@
 
         <!-- CREW OR EMPLOYEE LIST-->
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 well">
+            <div class="col-xs-6 col-xs-offset-3 well">
                 <div ng-show="isShowingCrews">
                     <ul>
                         <li ng-repeat="crew in crews">
@@ -51,7 +51,7 @@
 
         <!-- TIMECARD BUTTON -->
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 well text-center">
+            <div class="col-xs-6 col-xs-offset-3 well text-center">
                 <div class="row">
                     <button class="btn btn-primary" ng-click="showTimeCardModal()">New Timecard</button>
                 </div>

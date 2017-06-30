@@ -8,7 +8,7 @@
 
     <!-- SEARCH -->
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 well">
+        <div class="col-sm-6 col-sm-offset-3 well">
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="searchText.name" placeholder="Search by Employee name" />
             </div>
@@ -18,17 +18,17 @@
 
     <!-- EMPLOYEE LIST -->    
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 well">
+        <div class="col-sm-6 col-sm-offset-3 well">
             <div id="employee-list">
                 <ul class="list-unstyled">
                     <li ng-repeat="employee in employees | filter: searchText:strict | orderBy: 'name' ">
                         <a ng-click="selectEmployee(employee)">
-                            <div class="col-md-9">
+                            <div class="col-sm-9">
                                 <h4>{{employee.firstName + " " + employee.lastName}}</h4>
                                 <p><em>Crew: {{employee.crew}}</em></p>
                             </div>
                         </a>
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
                             <span style="color:red" class="glyphicon glyphicon-remove" ng-click="removeEmployee(employee)"></span>
                         </div>
                     </li>

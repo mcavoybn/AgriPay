@@ -2,15 +2,15 @@
 
     <!-- CREW LIST -->
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-sm-6 col-sm-offset-3">
             <h3 class="text-center">Crews</h3>
         </div>
-        <div class="col-md-6 col-md-offset-3 well">
+        <div class="col-sm-6 col-sm-offset-3 well">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search by Crew Name" ng-model="searchText.name">
             </div>            
         </div>
-        <div class="col-md-6 col-md-offset-3 well">
+        <div class="col-sm-6 col-sm-offset-3 well">
             <ul class="list-unstyled">
                 <li ng-repeat="crew in crews | filter: searchText:strict | orderBy: 'name'">
                     <h4 ui-sref="crew({id: crew.$id})">

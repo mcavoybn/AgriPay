@@ -79,3 +79,8 @@ nav a {
     max-width: 220px;
     max-height: 170px;
 }
+
+video{
+    max-height:150px;
+    max-width:200px;
+}

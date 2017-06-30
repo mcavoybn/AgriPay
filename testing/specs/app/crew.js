@@ -5,8 +5,10 @@
         beforeEach(function () {
             goToPage('crews');
         });
-
-
+        
+        /*it('should be able to a create a crew', function() {
+           element(by.buttonText('')).click();
+        });*/
     });
 
     /* Helper Functions */

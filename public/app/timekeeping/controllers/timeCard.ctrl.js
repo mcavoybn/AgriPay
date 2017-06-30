@@ -2,24 +2,26 @@
     'use strict';
 
     angular
-        .module('app')
-        .controller('TimeCardCtrl', TimeCardCtrl);
+    .module('app')
+    .controller('TimeCardCtrl', TimeCardCtrl);
 
-    TimeCardCtrl.$inject = ['$scope', 'close', '$firebaseAuth', '$firebaseArray'];
+    TimeCardCtrl.$inject = ['close', '$firebaseAuth', '$firebaseArray'];
 
-    function TimeCardCtrl($scope, close, $firebaseAuth, $firebaseArray) {
-        let vm2 = this;
+    function TimeCardCtrl(close, $firebaseAuth, $firebaseArray) {
+        let vm = this;
 
-        let crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
-        $scope.crews = $firebaseArray(crewsRef);
+        vm.cancel = () =>  close({}, 500);
+        vm.setTimeCardCrew = crew => vm.timeCard.crew = crew;
+        vm.submit = () => close(vm.timeCard, 500);
 
-        vm2.submit = () => {
-            close(vm2.timeCard, 500);
-        };
-        vm2.cancel = () => {
-            close({}, 500);
-        };
+        activate();
 
-        $scope.setTimeCardCrew = crew => vm2.timeCard.crew = crew;
+        /////////////////////
+
+        function activate() {
+            const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
+            $scope.crews = $firebaseArray(crewsRef);
+        }
+
     }
 })();

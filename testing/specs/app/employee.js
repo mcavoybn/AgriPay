@@ -17,7 +17,7 @@
             browser.sleep(2000);
             element(by.cssContainingText('option', 'W2')).click();
             element(by.cssContainingText('option', 'Female')).click();
-            element(by.cssContainingText('option', 'No Crew')).click();
+            element(by.cssContainingText('option', 'Watermelon Wranglers')).click();
             element(by.model('vm.employee.firstName')).sendKeys('Michelle');
             element(by.model('vm.employee.lastName')).sendKeys('Allred');
             element(by.model('vm.employee.middle')).sendKeys('K');

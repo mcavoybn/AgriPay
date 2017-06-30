@@ -16,7 +16,7 @@ body{
 a{text-decoration:none; color:#262626}
 a:link{text-decoration:none; color:#262626;} 
 a:visited{text-decoration:none; color:#262626;} 
-a:hover{text-decoration:none; color:#449D44;}
+a:hover{text-decoration:none; color:#449D44; cursor: pointer;}
 
 ol ul{
     list-style:none;

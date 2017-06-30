@@ -19,6 +19,7 @@
         it('should give error message when login fails', function () {
             testLogin('jgraziano2@gmail.com', 'passwordIncorrect')
 
+            browser.sleep(2500);
             expect(element(by.binding('message')).getText()).toEqual('The password is invalid or the user does not have a password.');
         });
 
@@ -53,7 +54,8 @@
         it('should give error message when login fails', function () {
             testLogin('jgraziano2@gmail.com', 'passwordIncorrect')
 
-            expect(element(by.binding('message')).getText()).toEqual('The password is invalid or the user does not have a password.');
+            browser.sleep(2500);
+            expect(element(by.binding('message')).getText()).toEqual('The email address is already in use by another account.');
         });
 
         it('should be able to navigate to the Login page', function () {
@@ -64,6 +66,7 @@
         it('should give error message when user already exists', function () {
             testLogin('jgraziano2@gmail.com', 'password');
 
+            browser.sleep(2500);
             expect(element(by.binding('message')).getText()).toEqual('The email address is already in use by another account.');
         });
 

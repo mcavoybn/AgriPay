@@ -1,32 +1,13 @@
 (function () {
-    
-    /****** App Tests ******/
+
     /* Crew Tests */
     describe('Crew Testing', function () {
         beforeEach(function () {
             goToPage('crews');
         });
-        
-        
+
+
     });
-    
-    /* Employee Tests */
-    describe('Employee Testing', function () {
-        beforeEach(function () {
-            goToPage('employees');
-        });
-        
-        
-    });
-    
-    /* Timekeeping Tests */
-    describe('Timekeeping Testing', function () {
-        beforeEach(function () {
-            goToPage('timeEntry');
-        });
-        
-        
-    });    
 
     /* Helper Functions */
     function goToPage (page) {
@@ -51,5 +32,4 @@
         element(by.model('password')).sendKeys(password);
         element(by.className('submitbutton')).click();
     }
-
 })();

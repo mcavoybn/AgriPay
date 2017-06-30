@@ -30,18 +30,16 @@
             }).then((modal) => {
                 modal.element.modal();
                 modal.close.then( employee => {
-                    $scope.employees.$add(employee);   
-                    console.log("employee.crew: ", employee.crew)
-                    incrementCrewCount(employee.crew);
+                    employee.crewID = getCrewId(employee.crew);
+                    $scope.employees.$add(employee);                      
                 });
             });
         }
-        
-        function incrementCrewCount(crew){
+                
+        function getCrewId(crewName){
             $scope.crews.forEach( checkCrew => {
-               if(crew.name == checkCrew.name) {
-                   crew.count++;
-                   crew.$save();
+               if(crew == checkCrew.name) {
+                   return checkCrew.$id;
                } 
             });
         }

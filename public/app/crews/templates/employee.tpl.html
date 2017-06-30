@@ -58,8 +58,8 @@
                 <div class="form-group">
                     <label>Select Crew:</label>
                     <select ng-model="employee.crew">
-                        <option ng-click="assignCrew('No Crew')">No Crew</option>
-                        <option ng-repeat="crew in crews" ng-click="assignCrew(crew)">{{crew.name}}</option>
+                        <option>No Crew</option>
+                        <option ng-repeat="crew in crews">{{crew.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

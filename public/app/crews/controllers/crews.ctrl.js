@@ -9,6 +9,7 @@
 
     function CrewsCtrl($scope, $firebaseAuth, $firebaseArray, ModalService) {
         $scope.createCrew = createCrew;
+        $scope.getCrewCount = getCrewCount;
         activate();
 
         function activate() {
@@ -19,6 +20,15 @@
             $scope.employees = $firebaseArray(employeesRef);
         }
         
+        function getCrewCount(crew){
+            let count = 0;
+            $scope.employees.forEach( employee => {
+               if(crew.$id == employee.crewID){
+                   count++;
+               } 
+            });
+            return count;
+        }
         function createCrew() {
             ModalService.showModal({
                 templateUrl: 'app/crews/templates/modals/createCrew.tpl.html',

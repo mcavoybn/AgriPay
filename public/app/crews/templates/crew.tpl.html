@@ -15,7 +15,9 @@
                 </div>
 
                 <ul class="list-unstyled">
-                    <li ng-repeat="employee in crewEmployees | orderBy: 'name'">{{employee.firstName}}</li>
+                    <li ng-repeat="employee in employees | filter:crew.$id | orderBy: 'employee.crewID'">
+                        {{employee.firstName + " " + employee.lastName}}
+                    </li>
                 </ul>
             </div>            
         </div>
@@ -37,7 +39,7 @@
                 </div>
 
                 <ul class="list-unstyled">
-                    <li ng-repeat="employee in crewEmployees | orderBy: 'name'">{{employee.firstName + " " + employee.lastName}}
+                    <li ng-repeat="employee in employees | filter:crew.$id | orderBy: 'employee.crewID'">{{employee.firstName + " " + employee.lastName}}
                         <span class="glyphicon glyphicon-remove-circle delete" ng-click="removeEmployeeFromCrew(employee)"></span>
                     </li>
                 </ul>

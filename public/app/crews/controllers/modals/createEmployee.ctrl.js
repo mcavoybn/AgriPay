@@ -13,6 +13,10 @@
 
         vm.submit = () => {close(vm.employee, 500);};
         vm.cancel = () => {close({}, 500);};
+        
+        activate();
+        
+        ///////////////////
 
         function activate() {
             vm.employee.employeeId = '_' + Math.random().toString(36).substr(2,9);

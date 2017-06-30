@@ -19,21 +19,18 @@
         activate();
 
         //////////////////////
-        var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+        
         function activate() {
             const crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
             $scope.crew = $firebaseObject(crewRef); 
             
-            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
-            $scope.allEmployees = $firebaseArray(employeesRef);
-            $scope.crewEmployees = $firebaseArray(employeesRef.orderByChild('crewID').equalTo($scope.crew.$id));
+            let employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');             
+            $scope.employees = $firebaseArray(employeesRef);
         }   
 
         function addEmployeesById(employeeKeys) {
-            console.log("adding employees by id!")
-            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+            let employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
             employeeKeys.forEach( (key) => {
-//                let employee = $firebaseObject(employeesRef.child(key));
                 let employeeRef = employeesRef.child(key);
                 employeeRef.update({
                    "crewID"  : $scope.crew.$id,
@@ -70,7 +67,7 @@
         
         function removeEmployeeFromCrew(employee) {
             let ref = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child(employee.$id);
-            ref.update({ "crewID" : null });            
+            ref.update({ "crewID" : null, "crew": "No Crew" });            
             $scope.crew.count--;
         }
 

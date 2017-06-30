@@ -17,7 +17,7 @@
                         <a><img ng-src="{{crew.photo}}" height="50px" />
                             {{crew.name}}</a>                        
                     </h4><br />                
-                    {{crew.count}} Employees in Crew             
+                    {{getCrewCount(crew)}} Employees in Crew             
                 </li>
             </ul>
             <button class="btn btn-primary" ng-click="createCrew()">Create New Crew</button>

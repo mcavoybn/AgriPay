@@ -17,7 +17,7 @@
         function activate() {
             const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees');
             $scope.employees = $firebaseArray(employeesRef);
-            
+
             const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
         }
@@ -29,20 +29,15 @@
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-                modal.close.then( employee => {
-                    $scope.employees.$add(employee);   
-                    console.log("employee.crew= "+employee.crew)
-                    incrementCrewCount(employee.crew);
+                modal.close.then(employee => {
+                    $scope.employees.$add(employee);
+                    $scope.crews.forEach(checkCrew => {
+                        if (checkCrew.$id == employee.crewID) {
+                            checkCrew.count++;
+                            checkCrew.$save();
+                        }
+                    });
                 });
-            });
-        }
-        
-        function incrementCrewCount(crew){
-            $scope.crews.forEach( checkCrew => {
-               if(crew.name == checkCrew.name){
-                   crew.count++;
-                   crew.$save();
-               } 
             });
         }
 

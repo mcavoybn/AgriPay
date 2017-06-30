@@ -24,23 +24,24 @@
             const crewRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews').child($stateParams.id);
             $scope.crew = $firebaseObject(crewRef); 
             
-            var employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
+            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
             $scope.allEmployees = $firebaseArray(employeesRef);
             $scope.crewEmployees = $firebaseArray(employeesRef.orderByChild('crewID').equalTo($scope.crew.$id));
-        }
+        }   
 
         function addEmployeesById(employeeKeys) {
+            console.log("adding employees by id!")
+            const employeesRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees'); 
             employeeKeys.forEach( (key) => {
-                const employee = $firebaseObject(employeesRef.child(key));
-
-                employee.$bindTo($scope, 'employee').then((ref) => {                    
-                    $scope.employee.crewID = $scope.crew.$id;
-                    $scope.employee.crew = $scope.crew.name;
+//                let employee = $firebaseObject(employeesRef.child(key));
+                let employeeRef = employeesRef.child(key);
+                employeeRef.update({
+                   "crewID"  : $scope.crew.$id,
+                    "crew" : $scope.crew.name
                 });
-
-                $scope.crew.count += 1;
+                $scope.crew.count++;
                 $scope.crew.$save();
-            });
+            });            
         }
         
         function addEmployeeToCrew() {
@@ -68,11 +69,9 @@
         }        
         
         function removeEmployeeFromCrew(employee) {
-            employee.crewID = null;
-            $scope.crewEmployees.$save(employee);
-
+            let ref = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child(employee.$id);
+            ref.update({ "crewID" : null });            
             $scope.crew.count--;
-            $scope.crew.$save();
         }
 
         function saveCrew() {

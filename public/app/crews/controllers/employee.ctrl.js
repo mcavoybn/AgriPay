@@ -9,28 +9,41 @@
 
     function EmployeeCtrl($scope, $state, $firebaseArray, $firebaseObject, $firebaseAuth, $stateParams, ModalService) {
         $scope.assignCrew = assignCrew;
-        
+
         $scope.clickedShow = false;
         $scope.clickShow = clickShow;
-        
+
         $scope.isEditing = false;
         $scope.editEmployee = editEmployee;
-        
-        $scope.goBack = goBack;        
+
+        $scope.goBack = goBack;
         $scope.saveEmployee = saveEmployee;
-        
+
         activate();
 
-        function activate(){
-            const employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId); 
+        function activate() {
+            const employeeRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('employees').child($stateParams.employeeId);
             $scope.employee = $firebaseObject(employeeRef);
-            
+
             const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
             $scope.crews = $firebaseArray(crewsRef);
         }
 
         function assignCrew(crew) {
+            $scope.crews.forEach(checkCrew => {
+                if (checkCrew.$id == $scope.employee.crewID) {
+                    checkCrew.count--;
+                    checkCrew.$save();
+                }
+            });
             $scope.employee.crew = crew;
+            $scope.employee.crewID = crew.$id;
+            $scope.crews.forEach(checkCrew => {
+                if (checkCrew.$id == $scope.employee.crewID) {
+                    checkCrew.count++;
+                    checkCrew.$save();
+                }
+            });
         }
 
         function clickShow() {

@@ -37,11 +37,14 @@
         }
                 
         function getCrewId(crewName){
+            let crewID = '';
             $scope.crews.forEach( checkCrew => {
-               if(crew == checkCrew.name) {
-                   return checkCrew.$id;
-               } 
+               if(crewName == checkCrew.name) {
+                   crewID = checkCrew.$id;
+               }                
             });
+            
+            return crewID;
         }
 
         function removeEmployee(employee) {

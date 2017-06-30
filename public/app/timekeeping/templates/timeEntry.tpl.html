@@ -36,9 +36,9 @@
                     </ul>
                 </div>
                 <div ng-hide="isShowingCrews">
-                    <input type="text" class="form-control" ng-model="searchText" placeholder="Search by employee name..">
+                    <input type="text" class="form-control" ng-model="searchText.lastName" placeholder="Search by employee name.." id="searchText">
                     <ul>
-                        <li ng-repeat="employee in employees | filter: searchText | orderBy: 'firstName'">
+                        <li ng-repeat="employee in employees | filter: searchText:strict | orderBy: 'firstName'">
                             <h4>{{employee.firstName + " " + employee.lastName }}</h4>
                             <button class="btn btn-primary" ng-click="clockInEmployee(employee)" ng-hide="isEmployeeClockedIn(employee)">Clock In</button>
                             <button class="btn btn-warning" ng-click="clockOutEmployee(employee)" ng-show="isEmployeeClockedIn(employee)">Clock Out</button>

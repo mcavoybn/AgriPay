@@ -19,7 +19,7 @@
         $scope.searchText = "";
 
         $scope.showCrewsTab = () => $scope.isShowingCrews = true;
-        $scope.showEmployeesTab = () => $scope.isShowingCrews = false;
+        $scope.showEmployeesTab = () => { $scope.isShowingCrews = false; /* Update input with scannerResult $('#searchText').val(scannerResult); */ }
         $scope.isShowingCrews = true;
 
         $scope.showTimeCardModal = showTimeCardModal;
@@ -44,6 +44,7 @@
 
             const timeCardsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeCards');
             $scope.timeCards = $firebaseArray(timeCardsRef);
+            
         }
 
         function addTimeCard(timeCard) {

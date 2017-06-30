@@ -40,7 +40,6 @@
                     if(!crew.hasOwnProperty('photo')){
                         crew.photo="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-group-512.png";
                     }
-                    crew.count = 0;
                     $scope.crews.$add(crew);
                 });
             });

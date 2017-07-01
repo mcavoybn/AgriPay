@@ -29,19 +29,19 @@
                 controllerAs: 'vm'
             }).then((modal) => {
                 modal.element.modal();
-                modal.close.then( employee => {
+                modal.close.then(employee => {
                     employee.crewID = getCrewId(employee.crew);
-                    $scope.employees.$add(employee);                      
+                    $scope.employees.$add(employee);
                 });
             });
         }
-                
-        function getCrewId(crewName){
+
+        function getCrewId(crewName) {
             let crewId = "";
-            $scope.crews.forEach( checkCrew => {
-               if(crewName == checkCrew.name) {
-                   crewId = checkCrew.$id;
-               } 
+            $scope.crews.forEach(checkCrew => {
+                if (crewName == checkCrew.name) {
+                    crewId = checkCrew.$id;
+                }
             });
             return crewId;
         }
@@ -51,7 +51,9 @@
         }
 
         function selectEmployee(employee) {
-            $state.go('employee', { employeeId: employee.$id });
+            $state.go('employee', {
+                employeeId: employee.$id
+            });
         }
     }
 })();

@@ -43,7 +43,6 @@
         });
 
         it('should give invalid field message when email is not an email', function () {
-            element(by.model('email')).click();
             element(by.model('email')).sendKeys('lkhsglhs');            
             element(by.className('submitbutton')).click();
 

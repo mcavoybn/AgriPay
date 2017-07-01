@@ -9,9 +9,10 @@
                 <h3>{{crew.manager}}</h3>
 
                 <div class="btn-group">                
-                    <button class="btn btn-default" ng-click="editCrew()">Edit</button>
-                    <button class="btn btn-default" ng-click="addEmployeeToCrew()">Add</button>            
+                    <button class="btn btn-primary" ng-click="editCrew()">Edit</button>
+                    <button class="btn btn-success" ng-click="addEmployeeToCrew()">Add</button>            
                     <button class="btn btn-danger" ng-click="deleteCrew()" ng-confirm="Are you sure you want to delete this crew?">Delete</button>
+                    <button class="btn btn-default" ui-sref="crews">Go Back</button>
                 </div>
 
                 <ul class="list-unstyled">

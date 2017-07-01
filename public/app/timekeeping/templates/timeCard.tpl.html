@@ -20,7 +20,7 @@
                     <input type="text" class="form-control" ng-model="vm.timeCard.overrideRate" placeholder="Override Hourly Rate" />
                     <label>Crew:</label>
                     <select ng-model="vm.timeCard.crew">
-                        <option ng-repeat="crew in crews" ng-click="vm.setTimeCardCrew(crew)">{{crew.name}}</option>
+                        <option ng-repeat="crew in vm.crews" ng-click="vm.setTimeCardCrew(crew)">{{crew.name}}</option>
                     </select> 
                     <h4>Field Info:</h4>
                     <input type="text" class="form-control" ng-model="vm.timeCard.field.id" placeholder="Field ID" />

@@ -56,10 +56,10 @@
                     <input type="text" ng-model="employee.hourlyRate" value="employee.hourlyRate">
                 </div>
                 <div class="form-group">
-                    <label>Select Crew:</label>
-                    <select ng-model="employee.crew">
+                    <labeln ng-model="employee.crew">Select Crew:</label>
+                    <select>
                         <option>No Crew</option>
-                        <option ng-repeat="crew in crews">{{crew.name}}</option>
+                        <option  ng-repeat="crew in crews">{{crew.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

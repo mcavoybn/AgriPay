@@ -20,7 +20,7 @@
 
         function activate() {
             const crewsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('crews');
-            $scope.crews = $firebaseArray(crewsRef);
+            vm.crews = $firebaseArray(crewsRef);
         }
 
     }

@@ -4,16 +4,16 @@
 
         <!-- BARCODE SCANNER -->
         <div class="row">
-            <div class="col-xs-6 col-xs-offset-3 well text-center">
+            <div class="col-sm-6 col-sm-offset-3 well text-center">
                 <button class="btn btn-primary" ng-click="startBarcodeScanner()" ng-hide="showingScanner">Show Barcode Scanner</button>
                 <button class="btn btn-warning" ng-click="stopBarcodeScanner()" ng-show="showingScanner">Hide Barcode Scanner</button>
-                <div ng-show="showingScanner" class="col-xs-6 col-xs-offset-3 text-center">
+                <div ng-show="showingScanner" class="col-sm-6 col-sm-offset-3 text-center">
                     <div id="barcodeScanner"></div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6 col-xs-offset-3 well text-center">
+            <div class="col-sm-6 col-sm-offset-3 well text-center">
                 <button class="btn btn-info" ng-click="showCrewsTab()" ng-hide="isShowingCrews">Crews</button>
                 <button class="btn btn-primary" ng-click="showCrewsTab()" ng-show="isShowingCrews">Crews</button>
 
@@ -25,7 +25,7 @@
 
         <!-- CREW OR EMPLOYEE LIST-->
         <div class="row">
-            <div class="col-xs-6 col-xs-offset-3 well">
+            <div class="col-sm-6 col-sm-offset-3 well">
                 <div ng-show="isShowingCrews">
                     <ul>
                         <li ng-repeat="crew in crews">
@@ -36,14 +36,27 @@
                     </ul>
                 </div>
                 <div ng-hide="isShowingCrews">
-                    <input type="text" class="form-control" ng-model="searchText" placeholder="Search by employee name..">
-                    <ul>
-                        <li ng-repeat="employee in employees | filter: searchText | orderBy: 'firstName'">
-                            <h4>{{employee.firstName + " " + employee.lastName }}</h4>
-                            <button class="btn btn-primary" ng-click="clockInEmployee(employee)" ng-hide="isEmployeeClockedIn(employee)">Clock In</button>
-                            <button class="btn btn-warning" ng-click="clockOutEmployee(employee)" ng-show="isEmployeeClockedIn(employee)">Clock Out</button>
-                        </li>
-                    </ul>
+                    <div ng-hide="showingScanner">
+                        <input type="text" class="form-control" ng-model="searchText.lastName" placeholder="Search by employee name..">
+                        <ul>
+                            <li ng-repeat="employee in employees | filter: searchText:strict | orderBy: 'firstName'">
+                                <h4>{{employee.firstName + " " + employee.lastName }}</h4>
+                                <button class="btn btn-primary" ng-click="clockInEmployee(employee)" ng-hide="isEmployeeClockedIn(employee)">Clock In</button>
+                                <button class="btn btn-warning" ng-click="clockOutEmployee(employee)" ng-show="isEmployeeClockedIn(employee)">Clock Out</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-show="showingScanner">
+                        <ul>
+                            <div id="scannerResultInput"></div>
+                            <li ng-repeat="employee in employees | filter: scannerResult">
+                                <h4>{{employee.firstName + " " + employee.lastName }}</h4>
+                                <button class="btn btn-primary" ng-click="clockInEmployee(employee)" ng-hide="isEmployeeClockedIn(employee)">Clock In</button>
+                                <button class="btn btn-warning" ng-click="clockOutEmployee(employee)" ng-show="isEmployeeClockedIn(employee)">Clock Out</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -51,7 +64,7 @@
 
         <!-- TIMECARD BUTTON -->
         <div class="row">
-            <div class="col-xs-6 col-xs-offset-3 well text-center">
+            <div class="col-sm-6 col-sm-offset-3 well text-center">
                 <div class="row">
                     <button class="btn btn-primary" ng-click="showTimeCardModal()">New Timecard</button>
                 </div>

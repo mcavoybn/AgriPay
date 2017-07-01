@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-    .module('app')
-    .controller('TimeEntryCtrl', TimeEntryCtrl);
+        .module('app')
+        .controller('TimeEntryCtrl', TimeEntryCtrl);
 
     TimeEntryCtrl.$inject = ['$scope', '$state', '$firebaseArray', '$firebaseObject', '$firebaseAuth', 'ModalService'];
 
@@ -16,7 +16,7 @@
         $scope.isCrewClockedIn = isCrewClockedIn;
         $scope.isEmployeeClockedIn = isEmployeeClockedIn;
 
-        $scope.searchText = "";
+        $scope.scannerResult = "";
 
         $scope.showCrewsTab = () => $scope.isShowingCrews = true;
         $scope.showEmployeesTab = () => $scope.isShowingCrews = false;
@@ -26,7 +26,10 @@
 
         $scope.showingScanner = false;
         $scope.startBarcodeScanner = startBarcodeScanner;
-        $scope.stopBarcodeScanner = () => { $scope.showingScanner = false; Quagga.stop(); }
+        $scope.stopBarcodeScanner = () => {
+            $scope.showingScanner = false;
+            Quagga.stop();
+        }
 
         activate();
 
@@ -47,10 +50,12 @@
         }
 
         function addTimeCard(timeCard) {
-            let timeEntries = _.filter($scope.timeEntries, (entry) => {return entry.hasOwnProperty('timeCardId')});
+            let timeEntries = _.filter($scope.timeEntries, (entry) => {
+                return entry.hasOwnProperty('timeCardId')
+            });
 
-            $scope.timeCards.$add(timeCard).then( timeCard => {
-                timeEntries.forEach( entry => {
+            $scope.timeCards.$add(timeCard).then(timeCard => {
+                timeEntries.forEach(entry => {
                     entry.timeCardId = timeCard.key;
                     $scope.timeEntries.$save(entry);
                 });
@@ -58,8 +63,10 @@
         }
 
         function clockInCrew(crew) {
-            let crewEmployees = _.filter($scope.employees, (employee) => {return employee.crewID === crew.$id}); 
-            crewEmployees.forEach( employee => clockInEmployee(employee) );
+            let crewEmployees = _.filter($scope.employees, (employee) => {
+                return employee.crewID === crew.$id
+            });
+            crewEmployees.forEach(employee => clockInEmployee(employee));
         }
 
         function clockOutCrew(crew) {
@@ -103,9 +110,9 @@
                     entry.hasOwnProperty('timeIn') &&
                     !entry.hasOwnProperty('timeOut')) {
                     count--;
-                console.log("Employee " + entry.employee.lastName + " " + entry.employee.firstName + "is clocked in");
-            }
-        });
+                    console.log("Employee " + entry.employee.lastName + " " + entry.employee.firstName + "is clocked in");
+                }
+            });
             return count == 0;
         }
 
@@ -116,9 +123,9 @@
                     entry.hasOwnProperty('timeIn') &&
                     !entry.hasOwnProperty('timeOut')) {
                     console.log("Employee " + employee.lastName + " " + employee.firstName + "is clocked in");
-                result = true;
-            }
-        });
+                    result = true;
+                }
+            });
             return result;
         }
 
@@ -144,29 +151,35 @@
                 decoder: {
                     readers: ["code_128_reader"]
                 }
-            }, scannerError );     
+            }, scannerError);
         }
 
-        function scannerError(err) {   
-            if (err) { console.log(err); return; }
-
+        function scannerError(err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
             Quagga.start();
             Quagga.onDetected(data => {
                 $('#barcodeScanner').css('border', '10px solid green');
-                setSearchText(data);
                 console.log("Scan result: ", data.codeResult.code);
+                $scope.scannerResult = data.codeResult.code;
+                $('#scannerResult').html('<div ng-model="scannerResult"></div>');
+                console.log("scannerResult=");
+                console.log($scope.scannerResult);
             });
             Quagga.onProcessed(data => {
                 $('#barcodeScanner').css('border', '10px solid red');
-                console.log("Scanning for barcode")
             });
         }
 
         //-- Helper Functions --//
-
-        function setSearchText(data) {            
-            let employee = _.filter($scope.employees, employee => { return employee.employeeId === data.codeResult.code});
-            $scope.searchText = employee[0].lastName;
+        function setScannerResult(data) {
+            let employee = _.filter($scope.employees, employee => {
+                return employee.employeeId === data.codeResult.code
+            });
+            
+            $scope.scannerResult = employee[0].lastName;
         }
 
         function getCurrentDateAndTime() {

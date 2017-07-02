@@ -14,17 +14,21 @@
         $scope.clockOutEmployee = clockOutEmployee;
 
         $scope.isCrewClockedIn = isCrewClockedIn;
+        $scope.isCrewEmpty = isCrewEmpty;
         $scope.isEmployeeClockedIn = isEmployeeClockedIn;
 
         $scope.scannerResult = "";
 
         $scope.showCrewsTab = () => $scope.isShowingCrews = true;
-        $scope.showEmployeesTab = () => { $scope.isShowingCrews = false; /* Update input with scannerResult $('#searchText').val(scannerResult); */ }
+        $scope.showEmployeesTab = () => {
+            $scope.isShowingCrews = false; /* Update input with scannerResult $('#searchText').val(scannerResult); */
+        }
         $scope.isShowingCrews = true;
 
         $scope.showTimeCardModal = showTimeCardModal;
 
         $scope.showingScanner = false;
+        $scope.scanResultEmployee = {};
         $scope.startBarcodeScanner = startBarcodeScanner;
         $scope.stopBarcodeScanner = () => {
             $scope.showingScanner = false;
@@ -47,7 +51,7 @@
 
             const timeCardsRef = firebase.database().ref().child($firebaseAuth().$getAuth().uid).child('timeCards');
             $scope.timeCards = $firebaseArray(timeCardsRef);
-            
+
         }
 
         function addTimeCard(timeCard) {
@@ -105,16 +109,19 @@
         }
 
         function isCrewClockedIn(crew) {
-            let count = crew.count;
+            let crewCount = getCrewCount(crew);
             $scope.timeEntries.forEach(entry => {
                 if (entry.employee.crew == crew.name &&
                     entry.hasOwnProperty('timeIn') &&
                     !entry.hasOwnProperty('timeOut')) {
-                    count--;
-                    console.log("Employee " + entry.employee.lastName + " " + entry.employee.firstName + "is clocked in");
+                    crewCount--;
                 }
             });
-            return count == 0;
+            return crewCount == 0;
+        }
+
+        function isCrewEmpty(crew) {
+            return getCrewCount(crew) == 0 ? "Can't clock in, this crew is Empty!" : "";
         }
 
         function isEmployeeClockedIn(employee) {
@@ -123,7 +130,6 @@
                 if (entry.employee.id == employee.$id &&
                     entry.hasOwnProperty('timeIn') &&
                     !entry.hasOwnProperty('timeOut')) {
-                    console.log("Employee " + employee.lastName + " " + employee.firstName + "is clocked in");
                     result = true;
                 }
             });
@@ -162,25 +168,18 @@
             }
             Quagga.start();
             Quagga.onDetected(data => {
-                $('#barcodeScanner').css('border', '10px solid green');
-                console.log("Scan result: ", data.codeResult.code);
-                $scope.scannerResult = data.codeResult.code;
-                $('#scannerResult').html('<div ng-model="scannerResult"></div>');
-                console.log("scannerResult=");
-                console.log($scope.scannerResult);
+                $('#scannerIndicator').css('color', 'green');
+                console.log("Barcode Detected! Scan result: ", data.codeResult.code);
+                $scope.employees.forEach(employee => {
+                    if (employee.employeeId == data.codeResult.code) {
+                        $('#scanResultEmployeeName').text(employee.firstName + ' ' + employee.lastName);
+                        $scope.scanResultEmployee = employee;
+                    }
+                });
             });
             Quagga.onProcessed(data => {
-                $('#barcodeScanner').css('border', '10px solid red');
+                $('#scannerIndicator').css('color', 'red');
             });
-        }
-
-        //-- Helper Functions --//
-        function setScannerResult(data) {
-            let employee = _.filter($scope.employees, employee => {
-                return employee.employeeId === data.codeResult.code
-            });
-            
-            $scope.scannerResult = employee[0].lastName;
         }
 
         function getCurrentDateAndTime() {
@@ -201,5 +200,18 @@
 
             return mm + '/' + dd + '/' + yyyy + ' ' + hours + ':' + min + ':' + sec;
         }
+
+        function getCrewCount(crew) {
+            let count = 0;
+            $scope.employees.forEach(employee => {
+                if (crew.$id == employee.crewID) {
+                    count++;
+                }
+            });
+            return count;
+        }
     }
+
+
+
 })();

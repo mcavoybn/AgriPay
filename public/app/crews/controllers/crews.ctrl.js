@@ -29,6 +29,7 @@
             });
             return count;
         }
+        
         function createCrew() {
             ModalService.showModal({
                 templateUrl: 'app/crews/templates/modals/createCrew.tpl.html',

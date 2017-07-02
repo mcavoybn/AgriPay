@@ -74,13 +74,15 @@ nav a {
 }
 
 /*--- Timekeeping --*/
-#barcodeScanner{
-    border: 10px solid red;
-    max-width: 220px;
-    max-height: 170px;
+#scannerIndicator{
+    font-size: 4em;
 }
 
 video{
+    max-height:150px;
+    max-width:175px;
+}
+canvas{
     max-height:150px;
     max-width:175px;
 }
